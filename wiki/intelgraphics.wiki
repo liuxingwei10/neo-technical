@@ -1,0 +1,209 @@
+Getting your intel integrated graphics card running faster than ever before
+
+1.) Unlock video acceleration group:
+
+System > Administration > Users and Groups. Click the "Unlock" button, Highlight your username. Click Properties then go to User Privileges. Check the box that says "Use 3d video accleration or webcams" or something like that. Click OK then close it all up.
+
+If on any other distro, be sure that your user is added to the group "video" like so:
+
+{{{
+sudo usermod -a -G video YourUsername
+}}}
+
+replace YourUsername with your actual username that you use to login
+
+2a.) Obtain the required tools to compile and obtain source code:
+
+Debian / Ubuntu users:
+
+{{{
+sudo apt-get install git-core build-essential automake autoconf libtalloc-dev && sudo apt-get build-dep mesa libdrm
+}}}
+
+Archlinux users:
+
+{{{
+sudo pacman -Syyu && sudo pacman -S glproto dri2proto base-devel xf86driproto xf86-video-intel git
+}}}
+
+3a.) Configure git:
+
+{{{
+git config --global user.name "Whatever you want"
+}}}
+
+4a.) Obtain the kernel source code via git:
+
+{{{
+cd /usr/src && sudo git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git && cd linux-2.6
+}}}
+
+5a.) Configure the kernel using "sudo make xconfig" or "sudo make menuconfig" without quotes with the required options described below:
+
+REQUIRED SETTINGS:
+
+{{{
+(Y) AGP
+(Y) DRM
+(Y) AGP_INTEL
+(M) DRM_I810
+(M) DRM_I915
+(Y) CONFIG_DRM_I915_KMS
+}}}
+
+6a.) Compile the kernel:
+
+{{{
+sudo make all && sudo make modules_install
+}}}
+
+Install the kernel:
+
+{{{
+sudo cp arch/x86/boot/bzImage /boot/vmlinuz-kms
+}}}
+
+Edit /boot/grub/menu.lst or /boot/grub/grub.cfg (which ever one exists) accordingly. Something like this for menu.lst:
+
+{{{
+default=0
+timeout=5
+
+title Intel DRM
+root (hd0,0)
+kernel /boot/vmlinuz-kms root=/dev/sda1 ro
+}}}
+
+or for grub.cfg...
+
+{{{
+set default=0
+set timeout=5
+
+menuentry "Intel DRM" {
+set root=(hd0,1)
+linux /boot/vmlinuz-kms root=/dev/sda1 ro
+}
+}}}
+
+7a.) Restart your computer:
+
+{{{
+sudo reboot
+}}}
+
+You may also do "sudo telinit 6" without quotes depending on your preference. "sudo shutdown -r now" without quotes also works.
+
+8a.) Obtain libdrm master:
+
+{{{
+mkdir devel && cd devel && git clone git://anongit.freedesktop.org/mesa/drm
+}}}
+
+9a.) Install xorg-macros:
+
+{{{
+git clone git://anongit.freedesktop.org/xorg/util/macros && cd macros && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+}}}
+
+10a.) Install pthread-stubs:
+
+{{{
+git clone git://anongit.freedesktop.org/xcb/pthread-stubs && cd pthread-stubs && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+}}}
+
+11a.) Install dri2proto:
+
+{{{
+git clone git://anongit.freedesktop.org/xorg/proto/dri2proto && cd dri2proto && ./autogen.sh --prefix=/usr &&  make && sudo make install && cd ..
+}}}
+
+12a.) Configuring libdrm master:
+
+{{{
+./autogen.sh --prefix=/usr
+}}}
+
+13a.) If everything suceeds, install it:
+
+{{{
+sudo make install
+}}}
+
+14a.) Download the xf86-video-intel driver:
+
+{{{
+cd .. && git clone git://anongit.freedesktop.org/xorg/driver/xf86-video-intel && cd xf86-video-intel
+}}}
+
+15a.) Compile the xf86-video-intel driver:
+
+{{{
+./autogen.sh --prefix=/usr
+}}}
+
+16a.) If everything suceeds, you can now compile:
+
+{{{
+make
+}}}
+
+17a.) If you get no compiling errors, now install the driver:
+
+{{{
+sudo make install
+}}}
+
+18a.) Fetch Mesa:
+
+{{{
+cd .. && git clone git://anongit.freedesktop.org/mesa/mesa  && cd mesa
+}}}
+
+PLEASE ONLY CHOOSE ONE OPTION! IF YOU DO NOT KNOW WHAT YOU ARE DOING PLEASE DO THE FIRST OPTION!
+
+{{{
+CFLAGS="-O3 -fomit-frame-pointer -march=native" CXXFLAGS="$CFLAGS" ./autogen.sh --prefix=/usr --with-dri-drivers=i810,i915,i965 --disable-gallium
+}}}
+
+If you are on a 64-bit processor and Linux distribution (no gallium):
+
+{{{
+CFLAGS="-O3 -fomit-frame-pointer -march=native" CXXFLAGS="$CFLAGS" ./autogen.sh --prefix=/usr --libdir=/usr/lib64 --with-dri-drivers=i810,i915,i965 --disable-gallium --with-driver=dri --disable-32-bit --enable-64-bit
+}}}
+
+If on a 64-bit processor and Linux distribution but 3D doesn't work properly according to glxinfo:
+
+{{{
+CFLAGS="-O3 -fomit-frame-pointer -march=native" CXXFLAGS="$CFLAGS" ./autogen.sh --prefix=/usr --with-dri-drivers=i810,i915,i965 --disable-gallium --with-driver=dri --disable-32-bit --enable-64-bit
+}}}
+
+If on archlinux or slackware (no gallium):
+
+{{{
+CFLAGS="-O3 -fomit-frame-pointer -march=native" CXXFLAGS="$CFLAGS" ./autogen.sh --prefix=/usr --with-dri-driverdir=/usr/lib/xorg/modules/dri --with-dri-drivers=i810,i915,i965 --disable-gallium
+}}}
+
+To enable intel gallium:
+
+{{{
+CFLAGS="-O3 -fomit-frame-pointer -march=native" CXXFLAGS="$CFLAGS" ./autogen.sh --prefix=/usr --with-dri-drivers="" --enable-gallium --enable-gallium-i915 --enable-gallium-i965
+}}}
+
+20a.) Compile:
+
+{{{
+make
+}}}
+
+21a.) Install:
+
+{{{
+sudo make install && sudo ldconfig
+}}}
+
+22a.) Restart computer:
+
+{{{
+sudo telinit 6
+}}}

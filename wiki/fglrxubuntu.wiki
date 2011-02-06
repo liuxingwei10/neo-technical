@@ -1,0 +1,31 @@
+Installing latest AMD CCC (Catalyst Control Center) on Ubuntu
+
+{{{
+cd && mkdir ati && cd ati && wget http://www2.ati.com/drivers/linux/ati-driver-installer-11-1-x86.x86_64.run
+}}}
+
+{{{
+sudo apt-get install dh-make debconf debhelper cdbs dkms module-assistant build-essential
+}}}
+
+{{{
+sudo mv -vi /usr/lib/xorg/modules/extensions/libdri.so /tmp/libdri.so
+}}}
+
+{{{
+sh ati-driver-installer-11-1-x86.x86_64.run --buildpkg
+}}}
+
+{{{
+sudo dpkg -i *.deb
+}}}
+
+{{{
+sudo aticonfig --initial -f
+}}}
+
+Now restart your computer.
+
+{{{
+sudo telinit 6
+}}}

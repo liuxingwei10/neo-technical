@@ -1,12 +1,8 @@
 Getting and building EMC 2.4.5 (latest) on Arch Linux with RTAI MAGMA (latest from CVS) from source
 
-For those who want to do this from AUR
+For those who want to do this using makepkg:
 
-http://aur.archlinux.org/packages.php?ID=40142
-
-http://aur.archlinux.org/packages.php?ID=40144
-
-http://aur.archlinux.org/packages.php?ID=40145
+svn checkout http://neo-technical.googlecode.com/svn/trunk/x86/PKGBUILDS neo-technical
 
 *WARNING! DO NOT USE THE CLOSED-SOURCE NVIDIA DRIVER BINARY BLOBS!*
 

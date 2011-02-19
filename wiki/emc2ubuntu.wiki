@@ -32,7 +32,7 @@ sudo cvs -d:pserver:anonymous@cvs.gna.org:/cvs/rtai co magma && cd linux && sudo
 5a.) Fetch the kernel config:
 
 {{{
-sudo wget http://aur.archlinux.org/packages/rtai-kernel/rtai-kernel/rtai-kernel.config && sudo mv -vi rtai-kernel.config .config
+sudo wget http://neo-technical.googlecode.com/svn/trunk/x86/PKGBUILDS/rtai-kernel/rtai-kernel.config && sudo mv -vi rtai-kernel.config .config
 }}}
 
 Editing the kernel config is STRONGLY NOT RECOMMENDED! This kernel config file is not the best but should support all if not most x86 machines.

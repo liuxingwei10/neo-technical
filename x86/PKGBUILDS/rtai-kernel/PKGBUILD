@@ -40,7 +40,7 @@ build() {
 
   #Build and install kernel with modules
   #Make with X number of cores
-  make -j$(cat /proc/cpuinfo | grep processor | wc -l) bzImage || return 1
+  make -j$(cat /proc/cpuinfo | grep processor | wc -l) all || return 1
   make INSTALL_MOD_PATH=$pkgdir modules_install || return 1
   mkdir $pkgdir/boot
   cp arch/$KARCH/boot/bzImage $pkgdir/boot/vmlinuz-rtai

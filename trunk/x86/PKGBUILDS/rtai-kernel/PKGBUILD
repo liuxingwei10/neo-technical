@@ -2,11 +2,10 @@
 
 pkgname=rtai-kernel
 pkgver=2.6.35.7
-pkgrel=2
-patch=hal-linux-2.6.35.7-x86-2.8-00.patch
+pkgrel=3
+patch=hal-linux-2.6.35.7-x86-2.8-01.patch
 pkgdesc="Kernel 2.6.35.7 with RTAI"
-#64-bit support coming back when userspace compiles
-arch=('i686')
+arch=('i686' 'x86_64')
 license=('GPL2')
 groups=('base')
 url="https://www.rtai.org"
@@ -14,10 +13,11 @@ depends=('gcc' 'make' 'patch')
 makedepends=('ncurses' 'dialog')
 install=$pkgname.install
 source=(http://www.kernel.org/pub/linux/kernel/v2.6/linux-$pkgver.tar.bz2
-        $patch $pkgname.config $pkgname.preset)
+        $patch $pkgname.config ${pkgname}64.config $pkgname.preset)
 md5sums=('f741879bcd3a5366a1bbe0ad5cdb7935'
-         '4883563145f5a7fe99342054e7e09e13'
-         'ee89679450d04c47cb1627172cd33572'
+         '89dbb514372ccf6aaceac7eadebbab6c'
+         '7eaad37fbb45bd6aafe997a9a9c4bf7a'
+         '6f90be9662675436bbb3cf46bc6b0ece'
          'dd6f60692cbd3e8787ab8bfe8adefbec')
 
 build() {
@@ -27,12 +27,11 @@ build() {
   #Apply RTAI patch
   patch -Np1 < ../$patch || return 1
   #Move configs (Arch specific)
-  #Remove 64-bit support for now
-  #if [ "$CARCH" = "x86_64" ]; then
-  #  mv -vi ../${pkgname}64.config .config
-  #else
+  if [ "$CARCH" = "x86_64" ]; then
+    mv -vi ../${pkgname}64.config .config
+  else
     mv -vi ../${pkgname}.config .config
-  #fi
+  fi
 
   #DO NOT uncomment the make menuconfig line unless you know what you are doing
   #By editing the config, DO NOT expect support

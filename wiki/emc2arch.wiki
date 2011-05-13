@@ -181,7 +181,7 @@ KERNEL=="rtf[0-9]*", MODE="0666"
 sudo reboot
 }}}
 
-15a.) Fetch, unpack, patch, and configure emc:
+15a.) Fetch, unpack, patch, and configure emc in the root of your own home directory:
 
 {{{
 wget http://downloads.sourceforge.net/project/emc/emc2/2.4.x/emc2_2.4.5/emc2_2.4.5.tar.gz && tar zxf emc2_2.4.5.tar.gz && cd emc2-2.4.5/src/hal/drivers && sed -i 's/pci_find_device/pci_get_device/g' *.c && cd ../.. && ./configure --prefix=/usr --with-python=/usr/bin/python2.7

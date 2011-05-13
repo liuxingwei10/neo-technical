@@ -18,7 +18,7 @@ sudo pacman -Syyu
 2a.) Install the following packages via pacman:
 
 {{{
-sudo pacman -S cvs libstdc++5 doxygen gawk libtool wget patch qt3 ncurses bc python bwidget xorg tcl tk gettext bc
+sudo pacman -S cvs libstdc++5 doxygen gawk libtool wget patch qt3 ncurses bc python python2 bwidget xorg tcl tk gettext bc
 }}}
 
 3a.) Fetch kernel source:
@@ -184,7 +184,7 @@ sudo reboot
 15a.) Fetch, unpack, patch, and configure emc:
 
 {{{
-wget http://downloads.sourceforge.net/project/emc/emc2/2.4.x/emc2_2.4.5/emc2_2.4.5.tar.gz && tar zxf emc2_2.4.5.tar.gz && cd emc2-2.4.5/src/hal/drivers && sed -i 's/pci_find_device/pci_get_device/g' *.c && cd ../.. && ./configure --prefix=/usr
+wget http://downloads.sourceforge.net/project/emc/emc2/2.4.x/emc2_2.4.5/emc2_2.4.5.tar.gz && tar zxf emc2_2.4.5.tar.gz && cd emc2-2.4.5/src/hal/drivers && sed -i 's/pci_find_device/pci_get_device/g' *.c && cd ../.. && ./configure --prefix=/usr --with-python=/usr/bin/python2.7
 }}}
 
 16a.) If you don't get any configure errors, compile it:

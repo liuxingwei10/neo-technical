@@ -47,10 +47,10 @@ Specifically for AMD64 (64-bit) machines:
 sudo wget http://neo-technical.googlecode.com/svn/trunk/x86/PKGBUILDS/rtai-kernel/rtai-kernel64.config && sudo mv -vi rtai-kernel64.config .config
 }}}
 
-6a.) Compile the kernel, firmware, modules, and headers:
+6a.) Compile the kernel, and modules:
 
 {{{
-sudo make clean && sudo make && sudo make modules_install && sudo make firmware && sudo make firmware_install && sudo make headers_check && sudo make headers_install
+sudo make clean && sudo make && sudo make modules_install
 }}}
 
 7a.) Install the kernel:

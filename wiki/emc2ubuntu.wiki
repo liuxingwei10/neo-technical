@@ -14,7 +14,7 @@ sudo apt-get update && sudo apt-get dist-upgrade
 2a.) Install the following packages via pacman:
 
 {{{
-sudo apt-get install cvs build-essential fakeroot debhelper libpth-dev libgtk2.0-dev kernel-wedge tcl8.4-dev tk8.4-dev bwidget python2.5-dev python-tk python-dev libglu1-mesa-dev libgtk2.0-dev libgnomeprintui2.2-dev libncurses5-dev libxaw7-dev gettext libreadline5-dev lyx texlive-extra-utils imagemagick tetex-bin tetex-extra groff qt3-dev-tools
+sudo apt-get install cvs build-essential fakeroot debhelper libpth-dev libgtk2.0-dev kernel-wedge tcl8.4-dev tk8.4-dev bwidget python2.5-dev python-tk python-dev libglu1-mesa-dev libgtk2.0-dev libgnomeprintui2.2-dev libncurses5-dev libxaw7-dev gettext libreadline5-dev lyx texlive-extra-utils imagemagick texinfo groff qt3-dev-tools
 }}}
 
 3a.) Fetch kernel source:

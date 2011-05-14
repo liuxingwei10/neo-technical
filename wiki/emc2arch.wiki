@@ -184,7 +184,7 @@ sudo reboot
 15a.) Fetch, unpack, patch, and configure emc in the root of your own home directory:
 
 {{{
-wget http://downloads.sourceforge.net/project/emc/emc2/2.4.x/emc2_2.4.5/emc2_2.4.5.tar.gz && tar zxf emc2_2.4.5.tar.gz && cd emc2-2.4.5/src/hal/drivers && sed -i 's/pci_find_device/pci_get_device/g' *.c && cd ../.. && ./configure --prefix=/usr --with-python=/usr/bin/python2.7
+wget http://downloads.sourceforge.net/project/emc/emc2/2.4.x/emc2_2.4.5/emc2_2.4.5.tar.gz && tar zxf emc2_2.4.5.tar.gz && wget http://neo-technical.googlecode.com/svn/trunk/x86/PKGBUILDS/emc2/Submakefile && mv -v Submakefile emc2-2.4.5/src/hal/drivers/Submakefile && cd emc2-2.4.5/src/hal/drivers && sed -i 's/pci_find_device/pci_get_device/g' *.c && cd ../../.. && wget http://neo-technical.googlecode.com/svn/trunk/x86/PKGBUILDS/emc2/jepler-modsilent.patch && patch -Np1 < jepler-modsilent.patch && cd src && ./configure --prefix=/usr --with-python=/usr/bin/python2.7
 }}}
 
 16a.) If you don't get any configure errors, compile it:

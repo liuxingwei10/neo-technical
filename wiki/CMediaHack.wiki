@@ -8,7 +8,7 @@ This is a Windows 7 hack and will not help Linux users achieve better (higher) s
 
 This currently breaks surround sound playback. True surround sound and 2-channel to 5.1 or 7.1 does not work. I am hoping to fix this issue, or get the manufacturer to do so. It would be great to have this feature added to the official drivers. See note below.
 
-I honestly have no idea why C-Media and HT Omega left out all the other sample rates when they work fine. I am hoping to try and reason with them.
+I honestly have no idea why C-Media and HT Omega left out all the other sample rates when they work fine. I am hoping to try and reason with them. It was a real pain getting past WHQL..
 
 44100 and 48000 Hz will still work and will not be broken or replaced by other sample rates. Only depreciated ;)
 

@@ -15,6 +15,26 @@ I honestly have no idea why C-Media and HT Omega left out all the other sample r
 
 ===HOWTO===
 
-First, download the latest C-Media driver. The latest version is 8.17.42 (Provided exclusively by HT Omega) however there is very little difference (if any, from what I can see) between 8.17.42 and 8.17.40.
+First, make sure you completely uninstall the driver for your sound card:
 
-WHQL is messed up right now, give me a few minutes.
+Control Panel > Uninstall a program > C-Media PCI Audio Device or HT Omega Striker 7.1 (Don't reboot)
+
+Control Panel > Hardware and Sound > Device Manager > Right click on sound card > Uninstall > Check box that says "Delete the driver software for this device"
+
+Reboot.
+
+Now download the latest C-Media driver. The latest version is 8.17.42 (Provided exclusively by HT Omega) however there is very little difference (if any, from what I can see) between 8.17.42 and 8.17.40.
+
+After installation, don't reboot. Download my cmudax3.sys file here:
+
+http://neo-technical.googlecode.com/files/cmudax3.zip
+
+Copy the cmudax3.sys file to C:\Windows\System32\drivers
+
+Restart.
+
+To select your sample rates, please do not use the Xear3D control panel as this is now bugged (for now.) Instead, right click on the Speaker icon at the bottom left, select "Playback devices" and Highlight your C-Media 8770 sound card / HTO STRIKER 7.1. Go to "Properties" > "Advanced"  and now select your sample rate. For highest quality, select "16 bit, 192000 Hz (Studio Quality)" or "16 bit, 96000 Hz (Studio Quality.)
+
+Hit apply, and OK.
+
+Enjoy all the sample rates that C-Media and HT Omega don't want you to have!

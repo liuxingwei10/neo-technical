@@ -17,6 +17,4 @@ I honestly have no idea why C-Media and HT Omega left out all the other sample r
 
 First, download the latest C-Media driver. The latest version is 8.17.42 (Provided exclusively by HT Omega) however there is very little difference (if any, from what I can see) between 8.17.42 and 8.17.40.
 
-Download my reverse-engineered files here:
-
-1 second..
+WHQL is messed up right now, give me a few minutes.

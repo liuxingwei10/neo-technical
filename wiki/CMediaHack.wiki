@@ -1,6 +1,6 @@
 ==Enabling 8000, 11025, 16000, 22050, 32000, 88200, 96000, 176400, and 192000 Hz sample rates on _ALL_ C-MEDIA 8770 sound cards==
 
-An awesome little work-around that I discovered after reverse-engineering the Windows drivers for the C-Media 8770... Currently, the HT Omega Striker 7.1 and all other 8770 chipset based sound cards only support 16-bit/44100 and 16-bit/48000. If you need or want 16/192000 or 16/96000 (or many others) then here's how!
+An awesome little work-around that I discovered after reverse-engineering the Windows drivers for the C-Media 8770... Currently, the HT Omega Striker 7.1 and all other 8770 chipset based sound cards only support 16-bit/44100 and 16-bit/48000 in Windows 7 and Vista. If you need or want 16/192000 or 16/96000 (or many others) then here's how!
 
 ===Developer's notes===
 

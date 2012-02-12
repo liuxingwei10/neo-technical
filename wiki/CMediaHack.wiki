@@ -1,0 +1,5 @@
+An awesome little work-around that I discovered after reverse-engineering the Windows drivers for the C-Media 8770... Currently, the HT Omega Striker 7.1 and all other 8770 chipset based sound cards only support 16-bit/44100 and 16-bit/48000. If you need or want 16/192000 or 16/96000 then here's how!
+
+Please note: This is a Windows 7 hack and will not help Linux users achieve better (higher) sample rates.
+
+Just testing this one last time before step-by-step instructions. One second.

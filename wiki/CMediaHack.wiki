@@ -35,6 +35,8 @@ Restart.
 
 To select your sample rates, please do not use the Xear3D control panel as this is now bugged (for now.) Instead, right click on the Speaker icon at the bottom left, select "Playback devices" and Highlight your C-Media 8770 sound card / HTO STRIKER 7.1. Go to "Properties" > "Advanced"  and now select your sample rate. For highest quality, select "16 bit, 192000 Hz (Studio Quality)" or "16 bit, 96000 Hz (Studio Quality.)
 
+Tip: After selecting "Playback devices" you can highlight your device, press configure, click "next" and check the box for "Full-range speakers." This can increase audio quality as well. Currently only stereo audio is supported.
+
 Hit apply, and OK.
 
 Enjoy all the sample rates that C-Media and HT Omega don't want you to have!

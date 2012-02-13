@@ -12,6 +12,7 @@ I honestly have no idea why C-Media and HT Omega left out all the other sample r
 
 44100 and 48000 Hz will still work and will not be broken or replaced by other sample rates. Only depreciated ;)
 
+I just realized this but I should point this out to you. I am on Windows 7 x86_64 and this .sys file might not work for 32-bit systems. It probably won't so for 32-bit users, it is recommended you do _NOT_ proceed.
 
 ===HOWTO===
 

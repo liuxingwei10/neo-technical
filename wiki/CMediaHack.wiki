@@ -14,6 +14,8 @@ I honestly have no idea why C-Media and HT Omega left out all the other sample r
 
 I just realized this but I should point this out to you. I am on Windows 7 x86_64 and this .sys file might not work for 32-bit systems. It probably won't for 32-bit users so it is recommended you do _NOT_ proceed _IF_ you have a 32-bit system. I do not use 32-bit releases of Windows as it is slow enough as it is (at least compared to sane operating systems like GNU/Linux) and therefor this HOWTO has not been tested for 32-bit users, nor will it be (at least not by myself.)
 
+After further testing, the equalizer within HsMgr (Xear3D audio control panel) does not work either, and neither does S/PDIF from the looks of it. Talk about a crude hack.. My apologies. My assembly programming skills do need work as you can see.
+
 
 
 ===HOWTO===

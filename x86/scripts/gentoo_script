@@ -1,0 +1,222 @@
+#!/bin/bash
+
+# Copyright (C) 2012 Alec Ari <neotheuser@ymail.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+display_info ()
+{
+echo -e "   Please be sure that networking is configured or"
+echo -e "   this script will fail.\n"
+}
+
+sanity_checks ()
+{
+# Check for root privileges
+if [[ $UID -ne 0 ]] ; then
+   echo -e "   This script must be run with sudo."
+   echo -e "   (i.e. sudo ./gentoo)"
+   echo -e "   Exiting...\n"
+   exit 1
+else
+   echo -e "   This script has root privileges.\n"
+fi
+
+# Check for required utilies
+which wget
+if [[ "$?" -ne 0 ]] ; then
+   echo -e "   Please install wget."
+   echo -e "   (sudo apt-get install wget)"
+   echo -e "   Exiting...\n"
+   exit 1
+else
+   echo -e "   wget found.\n"
+fi
+
+which tar
+if [[ "$?" -ne 0 ]] ; then
+   echo -e "   Please install tar."
+   echo -e "   (sudo apt-get install tar)"
+   echo -e "   Exiting...\n"
+   exit 1
+else
+   echo -e "   tar found.\n"
+fi
+
+which mkfs.ext4
+if [[ "$?" -ne 0 ]] ; then
+   echo -e "   Please install e2fsprogs"
+   echo -e "   (sudo apt-get install e2fsprogs)"
+   echo -e "   Exiting...\n"
+   exit 1
+else
+   echo -e "   e2fsprogs found.\n"
+fi
+
+# Test networking
+# TODO: Automatically download latest stage3* files
+cd ~/
+mkdir -p /gentoo-tmp || return 1
+cd /gentoo-tmp || return 1
+wget http://gentoo.osuosl.org/releases/x86/current-stage3/stage3-i686-20120410.tar.bz2.DIGESTS || return 1
+
+if [[ -f stage3-i686-20120410.tar.bz2.DIGESTS ]] ; then
+   echo "   Networking works."
+else
+   echo "   Please connect your system to the internet"
+   echo "   and try again.\n"
+   exit 1
+fi
+}
+
+# FIXME
+verify_stage3 ()
+{
+cd /gentoo-tmp
+wget http://gentoo.osuosl.org/releases/x86/current-stage3/stage3-i686-20120410.tar.bz2.CONTENTS || return 1
+wget http://gentoo.osuosl.org/releases/x86/current-stage3/stage3-i686-20120410.tar.bz2 || return 1
+md5sum -c stage3-i686-20120410.tar.bz2.DIGESTS
+
+if [[ "$?" -ne 0 ]] ; then
+   echo "   Files cannot be verified."
+   echo "   Please re-run script."
+   echo "   Cleaning up..."
+   rm -rf /gentoo-tmp
+   echo "   Exiting...\n"
+   exit 1
+else
+   echo "   Files successfully verified."
+   echo "   Proceeding...\n"
+fi
+}
+
+format_disks ()
+{
+echo -e "   Zeroing 1MB of /dev/sda...\n"
+dd if=/dev/zero of=/dev/sda bs=512 count=2048  || return 1
+
+echo -e "   Writing partition table to /dev/sda...\n"
+cat > fdisk.txt << EOF
+n
+p
+
+
+
+a
+1
+w
+q
+EOF
+
+fdisk /dev/sda < fdisk.txt
+
+echo -e "   Creating ext4 filesystem...\n"
+mkfs.ext4 /dev/sda1  || return 1
+echo -e "   ext4 filesystem has been created..."
+echo -e "   CORRECTLY on /dev/sda.\n"
+sleep 1
+}
+
+mount_disks ()
+{
+echo -e "   Mounting filesystem to /mnt/gentoo...\n"
+mkdir -p /mnt/gentoo || return 1
+mount /dev/sda1 /mnt/gentoo || return 1
+echo -e "   Filesystem mounted.\n"
+}
+
+stage3 ()
+{
+echo -e "   Extracting tarballs to /dev/sda...\n"
+cd /mnt/gentoo
+cp -pr /gentoo-tmp/stage3-i686-20120410.tar.bz2 /mnt/gentoo/ || return 1
+tar xvjpf stage3-*.tar.bz2 || return 1
+wget http://gentoo.osuosl.org/releases/snapshots/current/portage-latest.tar.bz2 || return 1
+tar xvjf /mnt/gentoo/portage-latest.tar.bz2 -C /mnt/gentoo/usr || return 1
+
+echo -e "   Files successfully created.\n"
+sleep 1
+
+echo -e "   Generating make.conf...\n"
+
+cat > etc/make.conf << EOF
+# Please consult /usr/share/portage/config/make.conf.example for a different
+# example.
+CFLAGS="-O2 -pipe -fomit-frame-pointer -march=i686 -fPIC"
+CXXFLAGS="${CFLAGS}"
+# WARNING: Changing your CHOST is not something that should be done lightly.
+# Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.
+CHOST="i686-pc-linux-gnu"
+# These are the USE flags that were used in addition to what is provided by the
+# profile used for building.
+USE="mmx sse sse2 gmp X policykit nls dri opengl graphite lto zlib python lzo truetype pam ssl gnutls udev dbus alsa pulseaudio x264 tcl tk svg svga xv xcb ao aac a52 gif libnotify libkms smp glut bash-completion-r1 sasl sdl dga directfb fbcon ffmpeg gstreamer qt4 gtk lcms lame mad mpeg openal ogg vorbis xcomposite xvid v4l ntfsprogs theora pic strong-optimization g3dvl vdpau xa xvmc vaapi aspell device-mapper acpi"
+
+VIDEO_CARDS="intel"
+
+MAKEOPTS="-j2"
+
+GENTOO_MIRRORS="http://ftp.df.lth.se/pub/gentoo/"
+
+SYNC="rsync://ftp.df.lth.se/pub/gentoo/"
+
+PORTDIR_OVERLAY="/usr/local/portage"
+EOF
+
+echo -e "   Writing DNS info...\n"
+
+cat > etc/resolv.conf << EOF
+nameserver 193.150.193.150
+nameserver 83.255.245.11
+EOF
+
+echo -e "   Making sure space is left...\n"
+
+cd /mnt/gentoo
+touch emptyfile || return 1
+
+if [[ -f emptyfile ]] ; then
+   echo -e "   Filesystem is not full.\n"
+   echo -e "   Proceeding to cleanup...\n"
+else
+   echo -e "   Something went wrong (again.)\n"
+fi
+}
+
+cleanup ()
+{
+echo -e "   Removing temporary files..."
+rm -rf /gentoo-tmp
+echo -e "   Unmounting filesystem...\n"
+cd ~/
+sync || return 1
+sleep 5
+umount /dev/sda1 || return 1
+echo -e "   Filesystem unmounted."
+echo -e "   Exiting...\n"
+exit 1
+}
+
+display_info
+
+sanity_checks
+
+verify_stage3
+
+format_disks
+
+mount_disks
+
+stage3
+
+cleanup

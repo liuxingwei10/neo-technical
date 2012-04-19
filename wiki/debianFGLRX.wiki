@@ -1,0 +1,90 @@
+==Installing FGLRX on Debian==
+
+1.) Install required packages:
+
+{{{
+sudo apt-get install build-essential cdbs fakeroot dh-make debhelper debconf libstdc++6 dkms libqtgui4 wget execstack libelfg0 module-assistant
+}}}
+
+If not 32-bit system with 32-bit version of debian, install ia32-libs as well:
+
+{{{
+sudo apt-get install ia32-libs
+}}}
+
+Just to be safe, install any other possible dependencies:
+
+{{{
+sudo apt-get build-dep fglrx-control fglrx-driver xserver-xorg xserver-xorg-core mesa libdrm
+}}}
+
+2.) Download FGLRX:
+
+Please note: Debian may not be packing the latest drivers from AMD so we download the drivers directly from the AMD website.
+
+{{{
+wget http://www2.ati.com/drivers/linux/amd-driver-installer-12-3-x86.x86_64.run
+}}}
+
+3.) Mark the file as executable:
+
+{{{
+chmod a+x amd-driver-installer-12-3-x86.x86_64.run
+}}}
+
+4.) Run the installer:
+
+Please note: Instead of building a bunch of different .deb packages, let's just use the automated installer. The --buildpkg method may not always work correctly.
+
+{{{
+sudo ./amd-driver-installer-12-3-x86.x86_64.run
+}}}
+
+5.) Generate a new xorg.conf file. This is mandatory when installing FGLRX. X may crash and not even work.
+
+{{{
+sudo sudo amdconfig --initial -f
+}}}
+
+6.) Restart your computer.
+
+{{{
+sudo telinit 6
+}}}
+
+7.) Run fglrxinfo to make sure everything is working correctly.
+
+{{{
+fglrxinfo
+}}}
+
+If 3D acceleration is not working, please ensure you ran all the steps correctly. FGLRX is not a guarantee.
+
+
+
+
+==TROUBLE SHOOTING==
+
+
+
+For Unified Video Decoder (UVD) support (RadeonHD 4000 series and newer support UVD2) for hardware accelerated video decoding:
+
+{{{
+sudo apt-get install xvba-va-driver
+}}}
+
+
+
+If for some reason X does not start or keeps crashing, run the following command to ensure use of the FGLRX driver:
+
+{{{
+sudo amdconfig --input=/etc/X11/xorg.conf --tls=1
+}}}
+
+
+
+If X still hangs or has problems, as a last resort, disable TLS:
+
+{{{
+sudo amdconfig --tls=0
+}}}

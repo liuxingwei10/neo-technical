@@ -1,4 +1,4 @@
-=Installing FGLRX on Debian=
+==Installing FGLRX on Debian==
 
 1.) Install required packages:
 
@@ -63,7 +63,7 @@ If 3D acceleration is not working, please ensure you ran all the steps correctly
 
 
 
-=TROUBLE SHOOTING=
+==TROUBLE SHOOTING==
 
 
 
@@ -88,3 +88,6 @@ If X still hangs or has problems, as a last resort, disable TLS:
 {{{
 sudo amdconfig --tls=0
 }}}
+
+
+If you have any further problems or questions, please post a comment below. This HOWTO may apply to Ubuntu but is not intended to support such a distribution.

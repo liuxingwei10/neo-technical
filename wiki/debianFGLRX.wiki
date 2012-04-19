@@ -43,7 +43,7 @@ sudo ./amd-driver-installer-12-3-x86.x86_64.run
 5.) Generate a new xorg.conf file. This is mandatory when installing FGLRX. X may crash and not even work.
 
 {{{
-sudo sudo amdconfig --initial -f
+sudo amdconfig --initial -f
 }}}
 
 6.) Restart your computer.

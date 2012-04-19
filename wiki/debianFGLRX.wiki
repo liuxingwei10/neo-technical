@@ -20,7 +20,7 @@ sudo apt-get install ia32-libs
 Just to be safe, install any other possible dependencies:
 
 {{{
-sudo apt-get build-dep fglrx-control fglrx-driver xserver-xorg xserver-xorg-core mesa libdrm
+sudo apt-get build-dep xserver-xorg xserver-xorg-core mesa libdrm
 }}}
 
 2.) Download FGLRX:

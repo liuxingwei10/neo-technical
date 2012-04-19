@@ -1,6 +1,8 @@
 ==Installing FGLRX on Debian==
 
-Please note: This instructions are intended for Debian testing and Debian unstable. For Debian lenny, please visit the official Debian wiki for FGLRX. http://wiki.debian.org/ATIProprietary
+Please note: These instructions are intended for Debian testing and Debian unstable ONLY.
+
+For Debian lenny, please visit the official Debian wiki for FGLRX: http://wiki.debian.org/ATIProprietary
 
 
 1.) Install required packages:

@@ -1,4 +1,4 @@
-==Installing FGLRX on Debian==
+=Installing FGLRX on Debian=
 
 1.) Install required packages:
 
@@ -63,7 +63,7 @@ If 3D acceleration is not working, please ensure you ran all the steps correctly
 
 
 
-==TROUBLE SHOOTING==
+=TROUBLE SHOOTING=
 
 
 

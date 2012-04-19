@@ -4,6 +4,8 @@ Please note: These instructions are intended for Debian testing and Debian unsta
 
 For Debian lenny, please visit the official Debian wiki for FGLRX: http://wiki.debian.org/ATIProprietary
 
+Please be sure to remove any previous installation of Catalyst and restart before any new Catalyst installation. Please see trouble shooting section for details.
+
 
 1.) Install required packages:
 
@@ -94,5 +96,18 @@ If X still hangs or has problems, as a last resort, disable TLS:
 sudo amdconfig --tls=0
 }}}
 
+
+To uninstall any previous installation:
+
+{{{
+sudo sh /usr/share/ati/fglrx-uninstall.sh
+sudo apt-get remove --purge fglrx fglrx_* fglrx-amdcccle* fglrx-dev* xorg-driver-fglrx
+}}}
+
+Please be sure to restart your computer.
+
+{{{
+sudo telinit 6
+}}}
 
 If you have any further problems or questions, please post a comment below. This HOWTO may apply to Ubuntu but is not intended to support such a distribution.

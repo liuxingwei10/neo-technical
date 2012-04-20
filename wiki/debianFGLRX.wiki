@@ -13,7 +13,7 @@ Please be sure to remove any previous installation of Catalyst and restart befor
 sudo apt-get install build-essential cdbs fakeroot dh-make debhelper debconf libstdc++6 dkms libqtgui4 wget execstack libelfg0 module-assistant
 }}}
 
-If not 32-bit system with 32-bit version of debian, install ia32-libs as well:
+If using 64-bit debian release on 64-bit machine, install ia32-libs as well:
 
 {{{
 sudo apt-get install ia32-libs

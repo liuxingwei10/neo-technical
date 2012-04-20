@@ -33,6 +33,14 @@ Please note: Debian may not be packing the latest drivers from AMD so we downloa
 wget http://www2.ati.com/drivers/linux/amd-driver-installer-12-3-x86.x86_64.run
 }}}
 
+If you want OpenCL 1.2 support:
+
+Please note: These are beta drivers and may not be as stable.
+
+{{{
+wget http://developer.amd.com/Downloads/OpenCL1.2betadriversLinux.tgz
+}}}
+
 3.) Mark the file as executable:
 
 {{{

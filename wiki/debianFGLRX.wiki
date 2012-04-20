@@ -41,10 +41,23 @@ Please note: These are beta drivers and may not be as stable.
 wget http://developer.amd.com/Downloads/OpenCL1.2betadriversLinux.tgz
 }}}
 
+If using OpenCL drivers, you will need to untar it:
+
+{{{
+tar zxf OpenCL1.2betadriversLinux.tgz
+}}}
+
 3.) Mark the file as executable:
 
 {{{
 chmod a+x amd-driver-installer-12-3-x86.x86_64.run
+}}}
+
+For OpenCL 1.2 beta driver:
+
+{{{
+cd fglrx-8.96
+chmod a+x amd-driver-installer-8.96-x86.x86_64.run
 }}}
 
 4.) Run the installer:
@@ -53,6 +66,12 @@ Please note: Instead of building a bunch of different .deb packages, let's just 
 
 {{{
 sudo ./amd-driver-installer-12-3-x86.x86_64.run
+}}}
+
+OpenCL 1.2:
+
+{{{
+sudo ./amd-driver-installer-8.96-x86.x86_64.run
 }}}
 
 5.) Generate a new xorg.conf file. This is mandatory when installing FGLRX. X may crash and not even work.

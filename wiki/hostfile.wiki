@@ -1,3 +1,5 @@
+===This wiki is for a friend===
+
 {{{
 127.0.0.1	localhost
 ::1		localhost
@@ -11,3 +13,34 @@ Every time the file is modified, run this:
 {{{
 dscacheutil -flushcache
 }}}
+
+To unblock, just put a # sign as the first character, before the line starts. For example:
+
+{{{
+#127.0.0.1 stuff here
+}}}
+
+The # sign is a comment, it is not a recognized part of the file, this being said, anything can go after the # sign. You can even do stuff like this if you want.
+
+{{{
+#howdy
+
+#garbage
+###more garbage#weee
+###############blah#COMMENTS RULE
+######################YES##############WIN#
+
+127.0.0.1	localhost
+::1		localhost
+#winning
+127.0.0.1 miami.muohio.edu www.miami.muohio.edu
+127.0.0.1 bannerweb.muohio.edu www.bannerweb.muohio.edu
+
+#i beat you#l00l
+
+#1337.1337.lol_lol.LOL.LOL.COM LOLOLOL.NET
+
+#########1#2#55659684690$308549539I###!!!!!!
+}}}
+
+etc..

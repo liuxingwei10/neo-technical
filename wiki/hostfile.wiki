@@ -1,0 +1,15 @@
+127.0.0.1	localhost
+::1		localhost
+
+127.0.0.1 miami.muohio.edu www.miami.muohio.edu
+
+
+
+For code format:
+
+{{{
+127.0.0.1	localhost
+::1		localhost
+
+127.0.0.1 miami.muohio.edu www.miami.muohio.edu
+}}}

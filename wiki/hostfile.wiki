@@ -1,8 +1,5 @@
 =This page is for my friends=
 
-
-==For Nicki==
-
 ===Adobe===
 
 Please note: I haven't touch a Mac in years so I cannot provide everything in deep detail. Following the on-screen instructions is generally what's going on here.
@@ -23,45 +20,3 @@ Double-click the .dmg file and it will mount the AdobeCreativeSuiteCleanerTool.d
 Accept the license agreement when prompted.
 
 Select CS5-CS5.5 to be removed, or if the option of "Clean all" is provided, select that. The idea is to purge as much as possible from the system to ensure a clean installation of CS6.
-
-==For Kathryn==
-
-===Blocking access to muohio.edu===
-
-{{{
-127.0.0.1	localhost
-::1		localhost
-
-127.0.0.1 miami.muohio.edu www.miami.muohio.edu
-127.0.0.1 bannerweb.muohio.edu www.bannerweb.muohio.edu
-}}}
-
-Every time the file is modified, run this:
-
-{{{
-dscacheutil -flushcache
-}}}
-
-To unblock, just put a # sign as the first character, before the line starts. For example:
-
-{{{
-#127.0.0.1 stuff here
-}}}
-
-The # sign is a comment, it is not a recognized part of the file, this being said, anything can go after the # sign.
-
-{{{
-#howdy
-
-127.0.0.1	localhost
-::1		localhost
-#winning
-127.0.0.1 miami.muohio.edu www.miami.muohio.edu
-127.0.0.1 bannerweb.muohio.edu www.bannerweb.muohio.edu
-
-#i beat you#l00l
-
-#1337.1337.lol_lol.LOL.LOL.COM LOLOLOL.NET
-}}}
-
-Keep in mind that the syntax for comments may change depending on what file you are editing. Generally regular text files use # for comments.

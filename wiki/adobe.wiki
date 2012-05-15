@@ -1,0 +1,22 @@
+==This page is for my friends==
+
+===Adobe===
+
+Please note: I haven't touch a Mac in years so I cannot provide everything in deep detail. Following the on-screen instructions is generally what's going on here.
+
+
+First, clean all previous installs of Adobe software.
+
+The uninstaller is located in Applications/Utilities/Adobe Installers.
+
+After uninstalling the Adobe suite, close all applications and restart your computer.
+
+Download the clean-up utility provided by Adobe here:
+
+http://download.macromedia.com/pub/creativesuite/cleanertool/mac/AdobeCreativeSuiteCleanerTool.dmg
+
+Double-click the .dmg file to mount it and it will be mounted in the name of "Adobe Creative Suite Cleaner Tool".
+
+Accept the license agreement when prompted.
+
+Select CS5-CS5.5 to be removed, or if the option of "Clean all" is provided, select that. The idea is to purge as much as possible from the system to ensure a clean installation of CS6.

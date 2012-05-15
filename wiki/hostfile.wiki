@@ -15,7 +15,7 @@ Download the clean-up utility provided by Adobe here:
 
 http://download.macromedia.com/pub/creativesuite/cleanertool/mac/AdobeCreativeSuiteCleanerTool.dmg
 
-Double-click the .dmg file and it will mount the AdobeCreativeSuiteCleanerTool.dmg file. It will be mounted in the name of "Adobe Creative Suite Cleaner Tool".
+Double-click the .dmg file to mount it and it will be mounted in the name of "Adobe Creative Suite Cleaner Tool".
 
 Accept the license agreement when prompted.
 

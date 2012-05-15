@@ -1,4 +1,32 @@
-===This wiki is for a friend===
+=This page is for my friends=
+
+
+==For Nicki==
+
+===Adobe===
+
+Please note: I haven't touch a Mac in years so I cannot provide everything in deep detail. Following the on-screen instructions is generally what's going on here.
+
+
+First, clean all previous installs of Adobe software.
+
+The uninstaller is located in Applications/Utilities/Adobe Installers.
+
+After uninstalling the Adobe suite, close all applications and restart your computer.
+
+Download the clean-up utility provided by Adobe here:
+
+http://download.macromedia.com/pub/creativesuite/cleanertool/mac/AdobeCreativeSuiteCleanerTool.dmg
+
+Double-click the .dmg file and it will mount the AdobeCreativeSuiteCleanerTool.dmg file. It will be mounted in the name of "Adobe Creative Suite Cleaner Tool".
+
+Accept the license agreement when prompted.
+
+Select CS5-CS5.5 to be removed, or if the option of "Clean all" is provided, select that. The idea is to purge as much as possible from the system to ensure a clean installation of CS6.
+
+==For Kathryn==
+
+===Blocking access to muohio.edu===
 
 {{{
 127.0.0.1	localhost
@@ -20,15 +48,10 @@ To unblock, just put a # sign as the first character, before the line starts. Fo
 #127.0.0.1 stuff here
 }}}
 
-The # sign is a comment, it is not a recognized part of the file, this being said, anything can go after the # sign. You can even do stuff like this if you want.
+The # sign is a comment, it is not a recognized part of the file, this being said, anything can go after the # sign.
 
 {{{
 #howdy
-
-#garbage
-###more garbage#weee
-###############blah#COMMENTS RULE
-######################YES##############WIN#
 
 127.0.0.1	localhost
 ::1		localhost
@@ -39,8 +62,6 @@ The # sign is a comment, it is not a recognized part of the file, this being sai
 #i beat you#l00l
 
 #1337.1337.lol_lol.LOL.LOL.COM LOLOLOL.NET
-
-#########1#2#55659684690$308549539I###!!!!!!
 }}}
 
-etc..
+Keep in mind that the syntax for comments may change depending on what file you are editing. Generally regular text files use # for comments.

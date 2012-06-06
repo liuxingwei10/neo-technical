@@ -6,19 +6,7 @@ An awesome little work-around that I discovered after reverse-engineering the Wi
 
 (1) This is a Windows 7 hack and will not help Linux users achieve better (higher) sample rates.
 
-(2) This currently breaks surround sound playback. True surround sound and 2-channel to 5.1 or 7.1 does not work. I am hoping to fix this issue, or get the manufacturer to do so. It would be great to have this feature added to the official drivers. See note below.
-
-(3) I honestly have no idea why C-Media and HT Omega left out all the other sample rates when they work fine. I am hoping to try and reason with them. It was a real pain getting past WHQL..
-
-(4) 44100 and 48000 Hz will still work and will not be broken or replaced by other sample rates. Only depreciated ;)
-
-(5) I just realized this but I should point this out to you. I am on Windows 7 x86_64 and this .sys file might not work for 32-bit systems. It probably won't for 32-bit users so it is recommended you do _NOT_ proceed _IF_ you have a 32-bit system. I do not use 32-bit releases of Windows as it is slow enough as it is (at least compared to sane operating systems like GNU/Linux) and therefor this HOWTO has not been tested for 32-bit users, nor will it be (at least not by myself.)
-
-(6) After further testing, the equalizer within HsMgr (Xear3D audio control panel) does not work either, and neither does S/PDIF from the looks of it. Talk about a crude hack.. My apologies. My assembly programming skills do need work as you can see.
-
-(7) After an attempt to open some of the 64-bit files in PE Explorer 1.99, 64-bit file support will be added in 2.00 so in the meantime, it will be more difficult reverse-engineering the file until PE Explorer 2.00 is released. PE Explorer is actually a very helpful tool, and will make this project of mine a lot easier, and I should be able to smooth out all, if not most, of the things I broke. Again, I apologize for this very crude hack, and I plan on fixing these problems myself. For my own personal use and interest, I have made it my priority to unlock the features that the C-Media 8770 chipset is capable of, but not supported by the software. HT Omega's Claro II sound card is very tempting, but I rather unlock the full potential of my Striker 7.1, and also save money.
-
-
+(2) This currently breaks surround sound playback. True surround sound and 2-channel to 5.1 or 7.1 does not work. I am hoping to fix this issue, or get the manufacturer to do so. It would be great to have this feature added to the official drivers.
 
 ===HOWTO===
 

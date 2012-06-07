@@ -28,7 +28,7 @@ You may download ACAT v4 from here:
 
 http://www.mediafire.com/download.php?y6jvyyv33260vd7
 
-If you would like to use this with ACAT v4, be sure to install ACAT v4 before proceeding and copying over files.
+If you would like to use this with ACAT v4, be sure to install ACAT v4 before proceeding and copying over files, if you have not already installed ACAT v4.
 
 2.) Create a folder in C:\Users\<Your User> and back-up the database_restrictions.xml file located in C:\Program Files (x86)\Codemasters\DiRT 3\database
 

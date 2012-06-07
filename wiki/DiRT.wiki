@@ -10,13 +10,19 @@ This modification to the database_restrictions.xml file will simply unlock all c
 
 ==TODO==
 
-This modification does not work with ACAT (Any Car Any Track) Version 4 (possibly others.) I am working on a fix for this, but will most likely require a new download.
+FIXED: This modification does not work with ACAT (Any Car Any Track) Version 4 (possibly others.) I am working on a fix for this, but will most likely require a new download.
 
 ==Massively unlocking DiRT 3==
 
 1.) Download my database_restrictions.xml file here:
 
 http://neo-technical.googlecode.com/files/database_restrictions.xml
+
+If you use ACAT, use this file instead:
+
+http://neo-technical.googlecode.com/files/database_restrictions_acat.xml
+
+Please note: Be sure to rename "database_restrictions_acat.xml" to "database_restrictions.xml" if you use ACAT.
 
 2.) Create a folder in C:\Users\<Your User> and back-up the database_restrictions.xml file located in C:\Program Files (x86)\Codemasters\DiRT 3\database
 

@@ -10,7 +10,7 @@ This modification to the database_restrictions.xml file will simply unlock all c
 
 ==TODO==
 
-FIXED: This modification does not work with ACAT (Any Car Any Track) Version 4 (possibly others.) I am working on a fix for this, but will most likely require a new download.
+_*FIXED:_* This modification does not work with ACAT (Any Car Any Track) Version 4 (possibly others.) I am working on a fix for this, but will most likely require a new download.
 
 ==Massively unlocking DiRT 3==
 

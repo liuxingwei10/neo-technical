@@ -30,6 +30,6 @@ Please note: Your DiRT 3 installation directory may vary
 
 3.) Copy the newly downloaded database_restrictions.xml file to your DiRT 3 installation directory, within the "database" folder.
 
-4.) Upon launching DiRT 3, it will ask if you would like to activate "TEAMS AND CARS UNLOCK PACK" now. Selecting "Yes" will unlock all content included in DiRT 3 such as the HUMMER H3, Colin McRae R4 and many others. Selecting the SATURN SKY and SCION tC Gymkhana vehicles (some others as well) will freeze the game unless of course you bought them.
+4.) Upon launching DiRT 3, it will ask if you would like to activate "TEAMS AND CARS UNLOCK PACK" now. Selecting "Yes" will unlock all content included in DiRT 3 such as the HUMMER H3, "Colin McRae R4" and many others. Selecting the SATURN SKY and SCION tC Gymkhana vehicles (some others as well) will freeze the game unless of course you bought them.
 
 Happy racing! And since when did modifying XML files ever hurt anybody?

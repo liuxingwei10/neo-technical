@@ -24,6 +24,10 @@ http://neo-technical.googlecode.com/files/database_restrictions_acat.xml
 
 Please note: Be sure to rename "database_restrictions_acat.xml" to "database_restrictions.xml" if you use ACAT.
 
+You may download ACAT v4 from here:
+
+http://www.mediafire.com/download.php?y6jvyyv33260vd7
+
 2.) Create a folder in C:\Users\<Your User> and back-up the database_restrictions.xml file located in C:\Program Files (x86)\Codemasters\DiRT 3\database
 
 Please note: Your DiRT 3 installation directory may vary

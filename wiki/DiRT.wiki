@@ -8,6 +8,10 @@ This "database restriction" hack is _*NOT*_ to be used to unlock additional DLCs
 
 This modification to the database_restrictions.xml file will simply unlock all content within game, but not content that must be bought separately. For example, the SCION tC will show up in the main menu, but this vehicle is not included within the game data, therefor upon selection, the game will freeze because the game data for the SCION tC is non-existent. Other vehicles like the HUMMER H3 will be unlocked, as it is included in the game, but not available by default. Cars that show up and have a message under them saying "This car must be purchased from the XBOX Live Marketplace" will be available. _*ALL*_ cars will be available in the menu selection screen, and you will be able to _*VIEW*_ all possible content for DiRT 3, however not every single vehicle will work, unless that content has been purchased or included within the game.
 
+==TODO==
+
+This modification does not work with ACAT (Any Car Any Track) Version 4 (possibly others.) I am working on a fix for this, but will most likely require a new download.
+
 ==Massively unlocking DiRT 3==
 
 1.) Download my database_restrictions.xml file here:

@@ -1,0 +1,158 @@
+=ONLY FOR AMD64 BUILDS=
+
+=IN PROGRESS IN PROGRESS DO NOT FOLLOW=
+
+==RadeonHD 7000 series support for Gentoo==
+
+This guide is overly specific and should only be used by those who either know what you're doing, or I told you to follow this page. This is *_NOT_* intended as the ultimate guide for anybody who wants RadeonHD 7000 series support for their gentoo install, rather my friends.
+
+===Updating the toolchain with Graphite loop optimization and LTO===
+
+*This all must be done as superuser / root!*
+
+1.) Modify /etc/portage/make.conf via vim or nano (emerge -av vim) and replace the entire file with this:
+
+{{{
+CFLAGS="-march=core2 -O2 -pipe -fomit-frame-pointer"
+CXXFLAGS="${CFLAGS}"
+
+CHOST="x86_64-pc-linux-gnu"
+
+USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper python sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam expat guile bash-completion-r1 readline ncurses"
+
+MAKEOPTS="-j5"
+
+GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
+
+SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
+}}}
+
+2.) Sync portage:
+
+{{{
+emerge --sync
+}}}
+
+3.) Update your system:
+
+{{{
+emerge --with-bdeps=y --update --verbose --deep --newuse --ask @world
+}}}
+
+After your system has been fully updated, we will need some newer toolchain packages such an updated version of GCC for i5/i7 instruction sets (this benefits mesa) and we'll also need to unmask newer versions of several Xorg and X11 libraries.
+
+4.) Unmask everything we will eventually need, right now. Open up your favorite command line text editor and modify the following file:
+
+/usr/portage/package.accept_keywords
+
+and replace all contents with this:
+
+{{{
+# kernel
+sys-kernel/git-sources
+# zlib
+sys-libs/zlib **
+# grub
+=sys-boot/grub-2.00 **
+# gcc
+=sys-devel/gcc-4.6.3 **
+sys-devel/gcc-config
+# udev and init
+sys-fs/udev
+sys-apps/openrc
+sys-fs/udev-init-scripts
+sys-apps/kmod
+# udev deps
+net-wireless/bluez
+sys-fs/udisks
+# pci and usbutils
+=sys-apps/hwids-99999999 **
+sys-apps/usbutils
+sys-apps/pciutils
+sys-libs/mtdev
+# lvm2
+sys-fs/lvm2
+sys-block/thin-provisioning-tools
+# LLVM
+sys-devel/llvm
+# Xorg
+x11-base/xorg-server
+x11-base/xorg-drivers
+x11-libs/libpciaccess
+x11-libs/libdrm **
+x11-libs/libxcb
+x11-libs/libXvMC
+x11-proto/inputproto
+x11-proto/xcb-proto
+x11-proto/glproto
+x11-proto/dri2proto
+x11-proto/randrproto
+x11-drivers/radeon-ucode
+x11-drivers/xf86-video-vesa
+x11-drivers/xf86-video-fbdev
+x11-drivers/xf86-video-ati
+x11-drivers/xf86-input-evdev
+x11-drivers/xf86-input-mouse
+x11-drivers/xf86-input-keyboard
+app-admin/eselect-opengl
+x11-apps/mesa-progs
+virtual/glu
+media-libs/glu
+media-libs/mesa **
+# 32-bit libs
+app-emulation/emul-linux-x86-qtlibs
+app-emulation/emul-linux-x86-baselibs
+app-emulation/emul-linux-x86-xlibs
+app-emulation/emul-linux-x86-medialibs
+app-emulation/emul-linux-x86-opengl
+app-emulation/emul-linux-x86-soundlibs
+app-emulation/emul-linux-x86-db
+# Various other things
+media-libs/libexif
+gnome-base/librsvg
+dev-libs/gobject-introspection-common
+dev-libs/gobject-introspection
+media-libs/babl
+media-libs/gegl
+dev-libs/glib
+dev-lang/vala
+dev-libs/vala-common
+}}}
+
+Please note that we are using kernel sources from the latest git tree but this is required for RadeonSI (Southern Islands / 7000 series) hardware. When kernel 3.7 is released and hits the gentoo tree, you may replace git-sources with vanilla-sources or gentoo-sources however vanilla-sources is generally updated sooner and more often than gentoo-sources.
+
+6.) It is time to update your system yet again:
+
+{{{
+emerge -uvDNa @world
+}}}
+
+After you have updated your system and your profile, it is important to modify your make.conf file again. The default "stable" version of GCC included in your install does not the i5/i7 CPU subsets, but now that you are running 4.6.3, you can now use your CPU to it's max potential.
+
+5.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a more complete make.conf file with updated CFLAGS:
+
+{{{
+CFLAGS="-march=corei7 -O2 -pipe -fomit-frame-pointer"
+CXXFLAGS="${CFLAGS}"
+
+CHOST="x86_64-pc-linux-gnu"
+
+# If you are not using the KDE profile,
+# remove it from your USE flags.
+#
+# If you want to use GNOME as your default
+# desktop environment, replace "kde" with "gnome"
+#
+# All other window managers such as lxde or xfce
+# do not need a USE flag.
+USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig kde mime cairo gd gdbm plasma qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau x264 ffmpeg xvmc dga svga theora soprano phonon lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
+
+MAKEOPTS="-j4"
+
+VIDEO_CARDS="radeon r600 radeonsi fbdev vesa"
+
+INPUT_DEVICES="evdev mouse keyboard"
+
+GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
+
+SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"

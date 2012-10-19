@@ -176,22 +176,38 @@ grub2-install --no-floppy /dev/sdX
 emerge -uav radeon-ucode
 }}}
 
-.) Configure your kernel:
+.) Download, install, and configure the kernel
+
+{{{
+emerge git-sources
+}}}
 
 
+{{{
+eselect kernel list
+}}}
 
-After you have updated your system, ended the world, and built your kernel, it is important to change your profile to something more practical for desktop usage than just command line.
+Select the linux-3.7-rcX kernel
 
-.) Update your profile. Please note that the KDE USE flag *_IS_* included in the example list of USE flags so if you choose amd64/10.0/desktop/gnome or amd64/10.0/desktop, you will need to modify your USE flags to avoid useless compile times. For the amd64/10.0/desktop profile, you do not need (nor should) use USE flags such as xfce or lxdm. Emerge those window managers yourself. For the GNOME profile, replace "kde" in your USE flags with "gnome" and you will be all set.
+{{{
+eselect kernel set <number>)
+}}}
 
+
+Enter the kernel source  directory and load the config
+
+{{{
+cd /usr/src/linux
+}}}
+
+
+.) Update your profile.
 {{{
 eselect profile list
 }}}
 
-Please only either choose amd64/10.0/desktop, amd64/10.0/desktop/kde, or amd64/10.0/desktop/gnome.
-
 {{{
-eselect profile set <number of choice>
+eselect profile set <number of GNOME profile>
 }}}
 
 7.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
@@ -202,12 +218,7 @@ CXXFLAGS="${CFLAGS}"
 
 CHOST="x86_64-pc-linux-gnu"
 
-# If you are not using the KDE profile,
-# remove it from your USE flags.
-#
-# If you want to use GNOME as your default
-# desktop environment, replace "kde" with "gnome"
-USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig kde mime cairo gd gdbm plasma qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau r600-llvm-compiler gles2 openvg x264 ffmpeg xvmc dga svga theora soprano phonon lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
+USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig gnome mime cairo gd gdbm qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau r600-llvm-compiler gles2 openvg x264 ffmpeg xvmc dga svga theora soprano lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
 
 MAKEOPTS="-j4"
 

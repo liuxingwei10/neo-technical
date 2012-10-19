@@ -168,6 +168,14 @@ grub2-install --no-floppy /dev/sdX
 }}}
 
 
+.) Ensure that the radeon microcode is installed:
+
+(A UAV is online! Enemy UAV is airborne!)
+
+{{{
+emerge -uav radeon-ucode
+}}}
+
 .) Configure your kernel:
 
 

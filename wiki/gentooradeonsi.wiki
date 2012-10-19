@@ -127,7 +127,13 @@ Please note that we are using kernel sources from the latest git tree but this i
 emerge -uvDNa @world
 }}}
 
-6.) Update GRUB:
+6.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
+
+{{{
+sed -i /etc/portage WAIT A SECOND
+}}}
+
+.) Update GRUB:
 
 Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *_Do not leave a trailing number at the end!_*
 
@@ -136,7 +142,7 @@ grub2-install --no-floppy /dev/sdX
 }}}
 
 
-7.) Configure your kernel:
+.) Configure your kernel:
 
 
 
@@ -157,7 +163,7 @@ eselect profile set <number of choice>
 7.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
 
 {{{
-CFLAGS="-march=core2 -O2 -pipe -fomit-frame-pointer"
+CFLAGS="-march=corei7 -O2 -pipe -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"
 
 CHOST="x86_64-pc-linux-gnu"

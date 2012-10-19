@@ -135,7 +135,8 @@ sed -i /etc/portage WAIT A SECOND
 
 .) Update GRUB:
 
-Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *_Do not leave a trailing number at the end!_*
+Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *
+Do not leave a trailing number at the end!*
 
 {{{
 grub2-install --no-floppy /dev/sdX

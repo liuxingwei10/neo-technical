@@ -190,7 +190,7 @@ eselect kernel list
 Select the linux-3.7-rcX kernel
 
 {{{
-eselect kernel set <number>)
+eselect kernel set <number>
 }}}
 
 

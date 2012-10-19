@@ -39,11 +39,11 @@ emerge --sync
 emerge --with-bdeps=y --update --verbose --deep --newuse --ask @world
 }}}
 
-After your system has been fully updated, we will need some newer toolchain packages such an updated version of GCC for i5/i7 instruction sets (this benefits mesa) and we'll also need to unmask newer versions of several Xorg and X11 libraries.
+After your system has been fully updated, we will need to unmask newer versions of several Xorg and X11 libraries.
 
 4.) Unmask everything we will eventually need, right now. Open up your favorite command line text editor and modify the following file:
 
-/usr/portage/package.accept_keywords
+/etc/portage/package.accept_keywords
 
 and replace all contents with this:
 
@@ -121,18 +121,43 @@ dev-libs/vala-common
 
 Please note that we are using kernel sources from the latest git tree but this is required for RadeonSI (Southern Islands / 7000 series) hardware. When kernel 3.7 is released and hits the gentoo tree, you may replace git-sources with vanilla-sources or gentoo-sources however vanilla-sources is generally updated sooner and more often than gentoo-sources.
 
-6.) It is time to update your system yet again:
+5.) It is time to update your system yet again:
 
 {{{
 emerge -uvDNa @world
 }}}
 
-After you have updated your system and your profile, it is important to modify your make.conf file again. The default "stable" version of GCC included in your install does not the i5/i7 CPU subsets, but now that you are running 4.6.3, you can now use your CPU to it's max potential.
+6.) Update GRUB:
 
-5.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a more complete make.conf file with updated CFLAGS:
+Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *_Do not leave a trailing number at the end!_*
 
 {{{
-CFLAGS="-march=corei7 -O2 -pipe -fomit-frame-pointer"
+grub2-install --no-floppy /dev/sdX
+}}}
+
+
+7.) Configure your kernel:
+
+
+
+After you have updated your system, it is important to change your profile to something more practical for desktop usage than just command line. If you want to use GNOME, 
+
+.) Update your profile. Please note that the KDE USE flag *_IS_* included in the example list of USE flags so if you choose amd64/10.0/desktop/gnome or amd64/10.0/desktop (please only choose one of those) you will need to modify your USE flags to avoid useless compile times. For the amd64/10.0/desktop profile, you do not need (nor should) use USE flags such as xfce or lxdm. Emerge those window managers yourself. For the GNOME profile, replace "kde" in your USE flags with "gnome" and you will be all set.
+
+{{{
+eselect profile list
+}}}
+
+Please only either choose amd64/10.0/desktop, amd64/10.0/desktop/kde, or amd64/10.0/desktop/gnome.
+
+{{{
+eselect profile set <number of choice>
+}}}
+
+7.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
+
+{{{
+CFLAGS="-march=core2 -O2 -pipe -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"
 
 CHOST="x86_64-pc-linux-gnu"
@@ -142,13 +167,11 @@ CHOST="x86_64-pc-linux-gnu"
 #
 # If you want to use GNOME as your default
 # desktop environment, replace "kde" with "gnome"
-#
-# All other window managers such as lxde or xfce
-# do not need a USE flag.
-USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig kde mime cairo gd gdbm plasma qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau x264 ffmpeg xvmc dga svga theora soprano phonon lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
+USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig kde mime cairo gd gdbm plasma qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau r600-llvm-compiler gles2 openvg x264 ffmpeg xvmc dga svga theora soprano phonon lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
 
 MAKEOPTS="-j4"
 
+# r600 is set just to be safe for mesa
 VIDEO_CARDS="radeon r600 radeonsi fbdev vesa"
 
 INPUT_DEVICES="evdev mouse keyboard"
@@ -156,3 +179,4 @@ INPUT_DEVICES="evdev mouse keyboard"
 GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
 
 SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
+}}}

@@ -127,13 +127,38 @@ Please note that we are using kernel sources from the latest git tree but this i
 emerge -uvDNa @world
 }}}
 
+After a massive system rebuild, you'll need to do a few more things before proceeding. Run these commands separately and in order, one after another.
+
+{{{
+etc-update
+env-update
+source /etc/profile
+}}}
+
+If etc-update has new config updates, use the "-3" option and modify those newly updated config files again to your liking via text editor.
+
 6.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
 
 {{{
-sed -i /etc/portage WAIT A SECOND
+sed -i 's/-march=core2/-march=corei7/g' /etc/portage/make.conf
 }}}
 
-.) Update GRUB:
+7.) Rebuild your system against your new CFLAGS and compiler to ensure system stability and reliability.
+
+{{{
+emerge -eND @world
+}}}
+
+Now that the world has ended, it is time to finish it up before doing anything else.
+
+{{{
+hash -r
+etc-update
+env-update
+source /etc/profile
+}}}
+
+.) Install GRUB to MBR:
 
 Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *
 Do not leave a trailing number at the end!*
@@ -147,9 +172,9 @@ grub2-install --no-floppy /dev/sdX
 
 
 
-After you have updated your system, it is important to change your profile to something more practical for desktop usage than just command line. If you want to use GNOME, 
+After you have updated your system, ended the world, and built your kernel, it is important to change your profile to something more practical for desktop usage than just command line.
 
-.) Update your profile. Please note that the KDE USE flag *_IS_* included in the example list of USE flags so if you choose amd64/10.0/desktop/gnome or amd64/10.0/desktop (please only choose one of those) you will need to modify your USE flags to avoid useless compile times. For the amd64/10.0/desktop profile, you do not need (nor should) use USE flags such as xfce or lxdm. Emerge those window managers yourself. For the GNOME profile, replace "kde" in your USE flags with "gnome" and you will be all set.
+.) Update your profile. Please note that the KDE USE flag *_IS_* included in the example list of USE flags so if you choose amd64/10.0/desktop/gnome or amd64/10.0/desktop, you will need to modify your USE flags to avoid useless compile times. For the amd64/10.0/desktop profile, you do not need (nor should) use USE flags such as xfce or lxdm. Emerge those window managers yourself. For the GNOME profile, replace "kde" in your USE flags with "gnome" and you will be all set.
 
 {{{
 eselect profile list

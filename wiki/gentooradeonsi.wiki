@@ -197,10 +197,20 @@ eselect kernel set <number>
 }}}
 
 
-Enter the kernel source  directory and load the config
+Enter the kernel source directory, load the config, compile, and install.
 
 {{{
 cd /usr/src/linux
+wget http://neo-technical.googlecode.com/svn/kernel_rc1.config
+make oldconfig
+make -j5
+rm -rf /boot/vmlinuz*
+rm -rf /boot/config*
+cp -prvL arch/x86/boot/bzImage /boot/vmlinuz-26
+cp -prvL System.map /boot/System.map
+ln -sfv /boot/System.map /boot/System.map-3.7-rc1
+cp -prvL .config /boot/config
+ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
 

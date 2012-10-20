@@ -294,8 +294,6 @@ cp -prvL .config /boot/config
 ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
-Just be sure to replace /dev/sdb1 with whatever partition and drive you have Gentoo on.
-
 11.) Reboot your system
 
 {{{

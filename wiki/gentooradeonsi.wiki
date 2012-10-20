@@ -329,13 +329,15 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 vim /etc/fstab
 }}}
 
-Or simply
+Or if you're lazy, simply:
 
 {{{
 cat > /etc/fstab << EOF
 /dev/sdb1               /               ext4            noatime         0 1
 EOF
 }}}
+
+Just be sure to replace /dev/sdb1 with whatever partition and drive you have Gentoo on.
 
 14.) Reboot your system
 

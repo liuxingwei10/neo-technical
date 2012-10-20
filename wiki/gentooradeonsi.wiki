@@ -4,8 +4,6 @@
 
 This guide is overly specific and should only be used by those who either know what you're doing, or I told you to follow this page. This is *_NOT_* intended as the ultimate guide for anybody who wants RadeonHD 7000 series support for their Gentoo install, rather my friends.
 
-===Updating the toolchain with Graphite loop optimization and LTO===
-
 *This all must be done as superuser / root!*
 
 1.) Modify /etc/portage/make.conf via vim or nano (emerge -av vim) and replace the entire file with this:

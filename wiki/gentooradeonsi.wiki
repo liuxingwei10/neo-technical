@@ -43,7 +43,7 @@ After your system has been fully updated, we will need to unmask newer versions 
 
 /etc/portage/package.accept_keywords
 
-and replace all contents with this:
+and replace all contents with this VERY CAREFULLY:
 
 {{{
 # kernel

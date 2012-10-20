@@ -246,9 +246,11 @@ gcc-config 2
 
 Run gcc-config -l again (lowercase L) to ensure that 4.6.3 has a star next to it.
 
-After updating your default compiler, clean your system of old packages:
+After updating your default compiler, clean your system of old packages and update your profile and environment:
 
 {{{
+env-update
+source /etc/profile
 emerge --depclean
 }}}
 

@@ -246,6 +246,12 @@ gcc-config 2
 
 Run gcc-config -l again (lowercase L) to ensure that 4.6.3 has a star next to it.
 
+After updating your default compiler, clean your system of old packages:
+
+{{{
+emerge --depclean
+}}}
+
 5.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
 
 {{{

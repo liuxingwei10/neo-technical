@@ -306,6 +306,8 @@ rc-update add gdm default
 
 19.) Verify all config files and library paths are up-to-date:
 
+Use -3 as the option for pretty much every time you use etc-update and you have updates awaiting. This will make sure the files get updated and modified correctly.
+
 {{{
 etc-update
 env-update

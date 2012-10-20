@@ -50,8 +50,6 @@ and replace all contents with this:
 sys-kernel/git-sources
 # zlib
 sys-libs/zlib **
-# grub
-=sys-boot/grub-2.00 **
 # gcc
 =sys-devel/gcc-4.6.3 **
 sys-devel/gcc-config
@@ -262,17 +260,7 @@ env-update
 source /etc/profile
 }}}
 
-8.) Install GRUB to MBR:
-
-Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *
-Do not leave a trailing number at the end!*
-
-{{{
-grub2-install --no-floppy /dev/sdX
-}}}
-
-
-9.) Ensure that the radeon microcode is installed:
+8.) Ensure that the radeon microcode is installed:
 
 (A UAV is online! Enemy UAV is airborne!)
 
@@ -280,14 +268,14 @@ grub2-install --no-floppy /dev/sdX
 emerge -uav radeon-ucode
 }}}
 
-10.) Add process accounting to start-up:
+9.) Add process accounting to start-up:
 
 {{{
 emerge acct
 rc-update add acct boot
 }}}
 
-11.) Download, install, and configure the kernel
+10.) Download, install, and configure the kernel
 
 {{{
 emerge git-sources
@@ -318,13 +306,7 @@ cp -prvL .config /boot/config
 ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
-12.) Generate grub.cfg file:
-
-{{{
-grub2-mkconfig -o /boot/grub2/grub.cfg
-}}}
-
-13.) Verify /etc/fstab is configured properly:
+11.) Verify /etc/fstab is configured properly:
 
 {{{
 vim /etc/fstab
@@ -340,7 +322,7 @@ EOF
 
 Just be sure to replace /dev/sdb1 with whatever partition and drive you have Gentoo on.
 
-14.) Reboot your system
+12.) Reboot your system
 
 {{{
 shutdown -r now
@@ -348,7 +330,7 @@ shutdown -r now
 
 When your system comes back up, you must modify your profile as root.
 
-15.) Update your profile:
+13.) Update your profile:
 
 {{{
 eselect profile list
@@ -358,7 +340,7 @@ eselect profile list
 eselect profile set <number of GNOME profile>
 }}}
 
-16.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
+14.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
 
 {{{
 CFLAGS="-march=corei7 -O2 -pipe -fomit-frame-pointer"
@@ -380,7 +362,7 @@ GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
 SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
 }}}
 
-17.) Get GNOME and X working:
+15.) Get GNOME and X working:
 
 {{{
 emerge --with-bdeps=y -uvDNa @world
@@ -407,7 +389,7 @@ etc-update
 
 with the -3 option.
 
-18.) Make gdm the default login manager:
+16.) Make gdm the default login manager:
 
 Please note that vim is the best command line editor and should be used whenever possible (hehe...)
 
@@ -417,7 +399,7 @@ vim /etc/conf.d/xdm
 
 Replace DISPLAYMANAGER="xdm" with DISPLAYMANAGER="gdm" within the file.
 
-19.) Add dbus, consolekit, and to your start-up scripts:
+17.) Add dbus, consolekit, and to your start-up scripts:
 
 {{{
 rc-update add dbus default
@@ -425,7 +407,7 @@ rc-update add consolekit default
 rc-update add gdm default
 }}}
 
-20.) Verify all config files and library paths are up-to-date:
+18.) Verify all config files and library paths are up-to-date:
 
 Use -3 as the option for pretty much every time you use etc-update and you have updates awaiting. This will make sure the files get updated and modified correctly.
 
@@ -435,7 +417,7 @@ env-update
 source /etc/profile
 }}}
 
-21.) Make a NORMAL user if you haven't already:
+19.) Make a NORMAL user if you haven't already:
 
 {{{
 useradd -m -G users,audio,video,power,wheel -s /bin/bash <your username>
@@ -445,13 +427,13 @@ passwd <your username>
 <might have to enter it again if it's a dictionary word>
 }}}
 
-22.) Reboot:
+20.) Reboot:
 
 {{{
 shutdown -r now
 }}}
 
-23.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
+21.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
 
 {{{
 glxinfo

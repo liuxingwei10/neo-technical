@@ -221,7 +221,7 @@ Please note that we are using kernel sources from the latest git tree but this i
 emerge --with-bdeps=y -uvDNa @world
 }}}
 
-After a massive system rebuild, you'll need to do a few more things before proceeding. Run these commands separately and in order, one after another.
+5.) After a massive system rebuild, you'll need to do a few more things before proceeding. Run these commands separately and in order, one after another.
 
 {{{
 etc-update
@@ -231,14 +231,14 @@ source /etc/profile
 
 If etc-update has new config updates, use the "-3" option and modify those newly updated config files again to your liking via text editor.
 
-To use the updated version of GCC, you have to select it. To do this, set your compiler and clean up your system.
+6.) To use the updated version of GCC, you have to select it. To do this, set your compiler and clean up your system.
 
 {{{
 gcc-config -l
 gcc-config <number of x86_64-pc-linux-gnu-4.6.3>
 }}}
 
-Please note that unlike eselect, gcc-config does not use "set." For example:
+Please note that unlike eselect, gcc-config does not use "set." For example, the correct usage is:
 
 {{{
 gcc-config 2
@@ -246,7 +246,7 @@ gcc-config 2
 
 Run gcc-config -l again (lowercase L) to ensure that 4.6.3 has a star next to it.
 
-After updating your default compiler, clean your system of old packages and update your profile and environment:
+7.) After updating your default compiler, clean your system of old packages and update your profile and environment:
 
 {{{
 env-update
@@ -254,7 +254,7 @@ source /etc/profile
 emerge --depclean
 }}}
 
-5.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
+8.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
 
 {{{
 sed -i 's/-march=core2/-march=core-avx-i/g' /etc/portage/make.conf
@@ -262,7 +262,7 @@ sed -i 's/-march=core2/-march=core-avx-i/g' /etc/portage/make.conf
 
 To be safe, verify that -march=core-avx-i has now replaced the -march=core2 in your CFLAGS.
 
-6.) Rebuild your system against your new CFLAGS and compiler to ensure system stability and reliability.
+9.) Rebuild your system against your new CFLAGS and compiler to ensure system stability and reliability.
 
 {{{
 emerge -eND @world
@@ -277,7 +277,7 @@ env-update
 source /etc/profile
 }}}
 
-7.) Ensure that the radeon microcode is installed:
+10.) Ensure that the radeon microcode is installed:
 
 (A UAV is online! Enemy UAV is airborne!)
 
@@ -285,20 +285,20 @@ source /etc/profile
 emerge -uav radeon-ucode
 }}}
 
-8.) Add process accounting to start-up:
+11.) Add process accounting to start-up:
 
 {{{
 emerge acct
 rc-update add acct boot
 }}}
 
-9.) Install git:
+12.) Install git:
 
 {{{
 emerge git
 }}}
 
-10.) Download, install, and configure the kernel
+13.) Download, install, and configure the kernel
 
 {{{
 cd /usr/src
@@ -319,7 +319,7 @@ cp -prvL .config /boot/config
 ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
-11.) Reboot your system
+14.) Reboot your system
 
 {{{
 shutdown -r now
@@ -327,7 +327,7 @@ shutdown -r now
 
 When your system comes back up, you must modify your profile as root.
 
-12.) Update your profile:
+15.) Update your profile:
 
 {{{
 eselect profile list
@@ -343,7 +343,7 @@ For example:
 eselect profile set 4
 }}}
 
-13.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
+16.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
 
 {{{
 CFLAGS="-march=core-avx-i -O2 -pipe -fomit-frame-pointer"
@@ -365,7 +365,7 @@ GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
 SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
 }}}
 
-14.) Get GNOME and X working:
+17.) Get GNOME and X working:
 
 {{{
 emerge --with-bdeps=y -uvDNa @world
@@ -392,7 +392,7 @@ etc-update
 
 with the -3 option.
 
-15.) Make gdm the default login manager:
+18.) Make gdm the default login manager:
 
 Please note that vim is the best command line editor and should be used whenever possible (hehe...)
 
@@ -402,7 +402,7 @@ vim /etc/conf.d/xdm
 
 Replace DISPLAYMANAGER="xdm" with DISPLAYMANAGER="gdm" within the file.
 
-16.) Add dbus, consolekit, and to your start-up scripts:
+19.) Add dbus, consolekit, and to your start-up scripts:
 
 {{{
 rc-update add dbus default
@@ -410,9 +410,7 @@ rc-update add consolekit default
 rc-update add gdm default
 }}}
 
-17.) Clean the system of old packages (GCC 4.5.4
-
-17.) Verify all config files and library paths are up-to-date:
+20.) Verify all config files and library paths are up-to-date:
 
 Use -3 as the option for pretty much every time you use etc-update and you have updates awaiting. This will make sure the files get updated and modified correctly.
 
@@ -422,7 +420,7 @@ env-update
 source /etc/profile
 }}}
 
-18.) Make a NORMAL user if you haven't already:
+21.) Make a NORMAL user if you haven't already:
 
 {{{
 useradd -m -G users,audio,video,power,wheel -s /bin/bash <your username>
@@ -432,16 +430,16 @@ passwd <your username>
 <might have to enter it again if it's a dictionary word>
 }}}
 
-19.) Reboot:
+22.) Reboot:
 
 {{{
 shutdown -r now
 }}}
 
-20.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
+23.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
 
 {{{
 glxinfo
 }}}
 
-OpenGL renderer string should now be AMD something rather.
+OpenGL renderer string should now be AMD something rather (VERDE, CYPRESS, etc.)

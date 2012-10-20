@@ -364,7 +364,7 @@ CHOST="x86_64-pc-linux-gnu"
 
 USE="mmx sse sse2 sse3 ssse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig gnome gnome-keyring mime cairo gd gdbm qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau r600-llvm-compiler gles2 openvg x264 ffmpeg xvmc dga svga theora soprano lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
 
-MAKEOPTS="-j4"
+MAKEOPTS="-j5"
 
 # r600 is set just to be safe for mesa
 VIDEO_CARDS="radeon r600 radeonsi fbdev vesa"

@@ -306,23 +306,9 @@ cp -prvL .config /boot/config
 ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
-11.) Verify /etc/fstab is configured properly:
-
-{{{
-vim /etc/fstab
-}}}
-
-Or if you're lazy, simply:
-
-{{{
-cat > /etc/fstab << EOF
-/dev/sdb1               /               ext4            noatime         0 1
-EOF
-}}}
-
 Just be sure to replace /dev/sdb1 with whatever partition and drive you have Gentoo on.
 
-12.) Reboot your system
+11.) Reboot your system
 
 {{{
 shutdown -r now
@@ -330,7 +316,7 @@ shutdown -r now
 
 When your system comes back up, you must modify your profile as root.
 
-13.) Update your profile:
+12.) Update your profile:
 
 {{{
 eselect profile list
@@ -340,7 +326,7 @@ eselect profile list
 eselect profile set <number of GNOME profile>
 }}}
 
-14.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
+13.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
 
 {{{
 CFLAGS="-march=corei7 -O2 -pipe -fomit-frame-pointer"
@@ -362,7 +348,7 @@ GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
 SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
 }}}
 
-15.) Get GNOME and X working:
+14.) Get GNOME and X working:
 
 {{{
 emerge --with-bdeps=y -uvDNa @world
@@ -389,7 +375,7 @@ etc-update
 
 with the -3 option.
 
-16.) Make gdm the default login manager:
+15.) Make gdm the default login manager:
 
 Please note that vim is the best command line editor and should be used whenever possible (hehe...)
 
@@ -399,7 +385,7 @@ vim /etc/conf.d/xdm
 
 Replace DISPLAYMANAGER="xdm" with DISPLAYMANAGER="gdm" within the file.
 
-17.) Add dbus, consolekit, and to your start-up scripts:
+16.) Add dbus, consolekit, and to your start-up scripts:
 
 {{{
 rc-update add dbus default
@@ -407,7 +393,7 @@ rc-update add consolekit default
 rc-update add gdm default
 }}}
 
-18.) Verify all config files and library paths are up-to-date:
+17.) Verify all config files and library paths are up-to-date:
 
 Use -3 as the option for pretty much every time you use etc-update and you have updates awaiting. This will make sure the files get updated and modified correctly.
 
@@ -417,7 +403,7 @@ env-update
 source /etc/profile
 }}}
 
-19.) Make a NORMAL user if you haven't already:
+18.) Make a NORMAL user if you haven't already:
 
 {{{
 useradd -m -G users,audio,video,power,wheel -s /bin/bash <your username>
@@ -427,13 +413,13 @@ passwd <your username>
 <might have to enter it again if it's a dictionary word>
 }}}
 
-20.) Reboot:
+19.) Reboot:
 
 {{{
 shutdown -r now
 }}}
 
-21.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
+20.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
 
 {{{
 glxinfo

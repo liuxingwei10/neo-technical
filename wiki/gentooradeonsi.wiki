@@ -280,6 +280,7 @@ cd /usr/src
 git checkout git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 cd linux
 wget http://neo-technical.googlecode.com/svn/kernel_rc1.config
+mv -v kernel_rc1.config .config
 make oldconfig
 make -j5
 make modules_install

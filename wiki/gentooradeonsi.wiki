@@ -25,13 +25,7 @@ GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
 SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
 }}}
 
-2.) Sync portage:
-
-{{{
-emerge --sync
-}}}
-
-3.) Update your system:
+2.) Update your system:
 
 {{{
 emerge --with-bdeps=y --update --verbose --deep --newuse --ask @world
@@ -39,7 +33,7 @@ emerge --with-bdeps=y --update --verbose --deep --newuse --ask @world
 
 After your system has been fully updated, we will need to unmask newer versions of several Xorg and X11 libraries.
 
-4.) Unmask everything we will eventually need, right now. Open up your favorite command line text editor and modify the following file:
+3.) Unmask everything we will eventually need, right now. Open up your favorite command line text editor and modify the following file:
 
 /etc/portage/package.accept_keywords
 
@@ -223,7 +217,7 @@ x11-wm/mutter
 
 Please note that we are using kernel sources from the latest git tree but this is required for RadeonSI (Southern Islands / 7000 series) hardware. When kernel 3.7 is released and hits the gentoo tree, you may replace git-sources with vanilla-sources or gentoo-sources however vanilla-sources is generally updated sooner and more often than gentoo-sources.
 
-5.) It is time to update your system yet again:
+4.) It is time to update your system yet again:
 
 {{{
 emerge --with-bdeps=y -uvDNa @world
@@ -239,13 +233,13 @@ source /etc/profile
 
 If etc-update has new config updates, use the "-3" option and modify those newly updated config files again to your liking via text editor.
 
-6.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
+5.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
 
 {{{
 sed -i 's/-march=core2/-march=corei7/g' /etc/portage/make.conf
 }}}
 
-7.) Rebuild your system against your new CFLAGS and compiler to ensure system stability and reliability.
+6.) Rebuild your system against your new CFLAGS and compiler to ensure system stability and reliability.
 
 {{{
 emerge -eND @world
@@ -260,7 +254,7 @@ env-update
 source /etc/profile
 }}}
 
-8.) Ensure that the radeon microcode is installed:
+7.) Ensure that the radeon microcode is installed:
 
 (A UAV is online! Enemy UAV is airborne!)
 
@@ -268,30 +262,23 @@ source /etc/profile
 emerge -uav radeon-ucode
 }}}
 
-9.) Add process accounting to start-up:
+8.) Add process accounting to start-up:
 
 {{{
 emerge acct
 rc-update add acct boot
 }}}
 
+9.) Install git:
+
+{{{
+emerge git
+}}}
+
 10.) Download, install, and configure the kernel
 
 {{{
-emerge git-sources
-eselect kernel list
-}}}
-
-Select the linux-3.7-rcX kernel
-
-{{{
-eselect kernel set <number>
-}}}
-
-
-Enter the kernel source directory, load the config, compile, and install.
-
-{{{
+git checkout git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 cd /usr/src/linux
 wget http://neo-technical.googlecode.com/svn/kernel_rc1.config
 make oldconfig

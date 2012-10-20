@@ -308,6 +308,7 @@ cd /usr/src/linux
 wget http://neo-technical.googlecode.com/svn/kernel_rc1.config
 make oldconfig
 make -j5
+make modules_install
 rm -rf /boot/vmlinuz*
 rm -rf /boot/config*
 cp -prvL arch/x86/boot/bzImage /boot/vmlinuz-26

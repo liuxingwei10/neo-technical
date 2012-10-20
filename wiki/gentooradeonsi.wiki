@@ -278,8 +278,9 @@ emerge git
 10.) Download, install, and configure the kernel
 
 {{{
+cd /usr/src
 git checkout git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-cd /usr/src/linux
+cd linux
 wget http://neo-technical.googlecode.com/svn/kernel_rc1.config
 make oldconfig
 make -j5

@@ -16,7 +16,7 @@ CXXFLAGS="${CFLAGS}"
 
 CHOST="x86_64-pc-linux-gnu"
 
-USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper python sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam expat guile bash-completion-r1 readline ncurses"
+USE="mmx sse sse2 sse3 ssse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper python sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam expat guile bash-completion-r1 readline ncurses"
 
 MAKEOPTS="-j5"
 
@@ -254,13 +254,24 @@ source /etc/profile
 emerge --depclean
 }}}
 
-8.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. To make this quick and easy, we will use sed.
+8.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. Replace /etc/portage/make.conf with the following:
+
+Please note: The ssse3 USE flag has also been included, not just adding "-march=core-avx-i" to the CFLAGS.
 
 {{{
-sed -i 's/-march=core2/-march=core-avx-i/g' /etc/portage/make.conf
-}}}
+CFLAGS="-march=core-avx-i -O2 -pipe -fomit-frame-pointer"
+CXXFLAGS="${CFLAGS}"
 
-To be safe, verify that -march=core-avx-i has now replaced the -march=core2 in your CFLAGS.
+CHOST="x86_64-pc-linux-gnu"
+
+USE="mmx sse sse2 sse3 ssse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper python sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam expat guile bash-completion-r1 readline ncurses"
+
+MAKEOPTS="-j5"
+
+GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
+
+SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
+}}}
 
 9.) Rebuild your system against your new CFLAGS and compiler to ensure system stability and reliability.
 

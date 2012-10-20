@@ -176,14 +176,17 @@ grub2-install --no-floppy /dev/sdX
 emerge -uav radeon-ucode
 }}}
 
+.) Add process accounting to start-up:
+
+{{{
+emerge acct
+rc-update add acct boot
+}}}
+
 .) Download, install, and configure the kernel
 
 {{{
 emerge git-sources
-}}}
-
-
-{{{
 eselect kernel list
 }}}
 

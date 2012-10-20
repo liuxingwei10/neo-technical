@@ -124,7 +124,7 @@ Please note that we are using kernel sources from the latest git tree but this i
 5.) It is time to update your system yet again:
 
 {{{
-emerge -uvDNa @world
+emerge --with-bdeps=y -uvDNa @world
 }}}
 
 After a massive system rebuild, you'll need to do a few more things before proceeding. Run these commands separately and in order, one after another.
@@ -245,7 +245,7 @@ CXXFLAGS="${CFLAGS}"
 
 CHOST="x86_64-pc-linux-gnu"
 
-USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig gnome mime cairo gd gdbm qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau r600-llvm-compiler gles2 openvg x264 ffmpeg xvmc dga svga theora soprano lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
+USE="mmx sse sse2 sse3 graphite lto gmp cxx pic nls nptl threads zlib udev device-mapper gpm dbus libnotify inotify python tcl tk policykit sasl gnutls ssl openssl crypt gcrypt cracklib mhash pam X multimedia Xaw3d fbcon smp truetype fontconfig gnome gnome-keyring mime cairo gd gdbm qt3support gtk dri expat guile bash-completion-r1 readline ncurses aspell alsa openal aalib libcaca oss pulseaudio xcomposite xcb xv xa libkms g3dvl vaapi vdpau r600-llvm-compiler gles2 openvg x264 ffmpeg xvmc dga svga theora soprano lame lzo svg gif png xml exif flac tiff mad mplayer dvd dvdr cdr cdparanoia ogg vorbis gstreamer sdl sound a52 dts sndfile libsamplerate faac aac ao glut opengl vala"
 
 MAKEOPTS="-j4"
 
@@ -258,3 +258,80 @@ GENTOO_MIRRORS="http://mirrors.rit.edu/gentoo/"
 
 SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
 }}}
+
+16.) Get GNOME and X working:
+
+{{{
+emerge --with-bdeps=y -uvDNa @world
+emerge -av consolekit gnome gdm
+}}}
+
+If you have any messages that show up that say, "The following USE changes are necessary to proceed..." then add --autounmask-write to the emerge line, for example:
+
+{{{
+emerge --autounmask-write --with-bdeps=y -uvDNa @world
+}}}
+
+or
+
+{{{
+emerge -av --autounmask-write gnome gdm
+}}}
+
+Then run
+
+{{{
+etc-update
+}}}
+
+with the -3 option.
+
+17.) Make gdm the default login manager:
+
+Please note that vim is the best command line editor and should be used whenever possible (hehe...)
+
+{{{
+vim /etc/conf.d/xdm
+}}}
+
+Replace DISPLAYMANAGER="xdm" with DISPLAYMANAGER="gdm" within the file.
+
+18.) Add dbus, consolekit, and to your start-up scripts:
+
+{{{
+rc-update add dbus default
+rc-update add consolekit default
+rc-update add gdm default
+}}}
+
+19.) Verify all config files and library paths are up-to-date:
+
+{{{
+etc-update
+env-update
+source /etc/profile
+}}}
+
+20.) Make a NORMAL user if you haven't already:
+
+{{{
+useradd -m -G users,audio,video,power,wheel -s /bin/bash <your username>
+passwd <your username>
+<enter password>
+<enter password to verify>
+<might have to enter it again if it's a dictionary word>
+}}}
+
+21.) Reboot:
+
+{{{
+shutdown -r now
+}}}
+
+22.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
+
+{{{
+glxinfo
+}}}
+
+OpenGL renderer string should now be AMD something rather.

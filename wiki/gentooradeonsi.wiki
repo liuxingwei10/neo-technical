@@ -158,7 +158,7 @@ env-update
 source /etc/profile
 }}}
 
-.) Install GRUB to MBR:
+8.) Install GRUB to MBR:
 
 Replace sdX with your current hard drive. sda, hda, sdb, sdc, etc. *
 Do not leave a trailing number at the end!*
@@ -168,7 +168,7 @@ grub2-install --no-floppy /dev/sdX
 }}}
 
 
-.) Ensure that the radeon microcode is installed:
+9.) Ensure that the radeon microcode is installed:
 
 (A UAV is online! Enemy UAV is airborne!)
 
@@ -176,14 +176,14 @@ grub2-install --no-floppy /dev/sdX
 emerge -uav radeon-ucode
 }}}
 
-.) Add process accounting to start-up:
+10.) Add process accounting to start-up:
 
 {{{
 emerge acct
 rc-update add acct boot
 }}}
 
-.) Download, install, and configure the kernel
+11.) Download, install, and configure the kernel
 
 {{{
 emerge git-sources
@@ -213,8 +213,22 @@ cp -prvL .config /boot/config
 ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
+12.) Generate grub.cfg file:
 
-.) Update your profile.
+{{{
+grub2-mkconfig -o /boot/grub2/grub.cfg
+}}}
+
+13.) Reboot your system
+
+{{{
+shutdown -r now
+}}}
+
+When your system comes back up, you must modify your profile as root.
+
+14.) Update your profile:
+
 {{{
 eselect profile list
 }}}
@@ -223,7 +237,7 @@ eselect profile list
 eselect profile set <number of GNOME profile>
 }}}
 
-7.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
+15.) Modify /etc/portage/make.conf again and add in your devices, video cards, and additional USE flags. For a full-on and fully-blown example of a good set of USE flags along with a practically complete make.conf file:
 
 {{{
 CFLAGS="-march=corei7 -O2 -pipe -fomit-frame-pointer"

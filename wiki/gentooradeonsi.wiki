@@ -238,7 +238,7 @@ gcc-config -l
 gcc-config <number of x86_64-pc-linux-gnu-4.6.3>
 }}}
 
-Please note that unlike eselect, gcc-config does not use "set <integer>" rather simply "<integer>" For example:
+Please note that unlike eselect, gcc-config does not use "set." For example:
 
 {{{
 gcc-config 2

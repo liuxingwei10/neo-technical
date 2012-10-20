@@ -40,8 +40,6 @@ After your system has been fully updated, we will need to unmask newer versions 
 and replace all contents with this VERY CAREFULLY:
 
 {{{
-# kernel
-sys-kernel/git-sources
 # zlib
 sys-libs/zlib **
 # gcc

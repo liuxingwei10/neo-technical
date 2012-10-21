@@ -378,7 +378,7 @@ SYNC="rsync://rsync29.us.gentoo.org/gentoo-portage"
 
 {{{
 emerge --with-bdeps=y -uvDNa @world
-emerge -av consolekit gnome gdm
+emerge -av consolekit xorg-drivers gnome gdm
 }}}
 
 If you have any messages that show up that say, "The following USE changes are necessary to proceed..." then add --autounmask-write to the emerge line, for example:
@@ -390,7 +390,7 @@ emerge --autounmask-write --with-bdeps=y -uvDNa @world
 or
 
 {{{
-emerge -av --autounmask-write gnome gdm
+emerge -av --autounmask-write xorg-drivers gnome gdm
 }}}
 
 Then run

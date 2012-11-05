@@ -38,6 +38,8 @@ After your system has been fully updated, we will need to unmask newer versions 
 and replace all contents with this VERY CAREFULLY:
 
 {{{
+# kernel
+sys-kernel/git-sources
 # zlib
 sys-libs/zlib **
 # gcc
@@ -211,8 +213,6 @@ x11-wm/metacity
 x11-wm/mutter
 }}}
 
-Please note that we are using kernel sources from the latest git tree but this is required for RadeonSI (Southern Islands / 7000 series) hardware. When kernel 3.7 is released and hits the gentoo tree, you may replace git-sources with vanilla-sources or gentoo-sources however vanilla-sources is generally updated sooner and more often than gentoo-sources.
-
 4.) It is time to update your system yet again:
 
 {{{
@@ -308,10 +308,8 @@ emerge git
 13.) Download, install, and configure the kernel
 
 {{{
-cd /usr/src
-rm -rf *
-git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-cd linux
+emerge -av git-sources
+cd /usr/src/linux
 wget http://neo-technical.googlecode.com/svn/kernel_rc1.config
 mv -v kernel_rc1.config .config
 make oldconfig
@@ -326,7 +324,7 @@ cp -prvL .config /boot/config
 ln -sfv /boot/config /boot/config-3.7-rc1
 }}}
 
-14.) Reboot your system
+14.) Reboot your system after updating grub.cfg or menu.lst:
 
 {{{
 shutdown -r now

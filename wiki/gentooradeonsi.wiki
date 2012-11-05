@@ -441,7 +441,7 @@ passwd <your username>
 shutdown -r now
 }}}
 
-23.) Log in to GNOME via GDM, and open up a GNOME terminal and make sure your video card is working properly:
+23.) Log in to GNOME via GDM, and open up a GNOME terminal to make sure your video card is working properly:
 
 {{{
 glxinfo

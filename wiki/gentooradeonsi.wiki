@@ -254,8 +254,6 @@ emerge --depclean
 
 8.) Now that your version of GCC (4.6.3) supports your real CPU, you can now modify your make.conf file for further optimization. This change will boost performance in Mesa and other packages as well due to support for SSE4.X and further CPU optimizations. Replace /etc/portage/make.conf with the following:
 
-Please note: The ssse3 USE flag has also been included, not just adding "-march=core-avx-i" to the CFLAGS.
-
 {{{
 CFLAGS="-march=core-avx-i -O2 -pipe -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"

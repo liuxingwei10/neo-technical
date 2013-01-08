@@ -1,6 +1,6 @@
 =This page is out of date and no longer maintained=
 
-Getting and building EMC 2.4.5 (latest) on Ubuntu with RTAI MAGMA (latest from CVS) from source
+==Building EMC 2.4.5 on Ubuntu with RTAI MAGMA from source==
 
 *WARNING! DO NOT USE THE CLOSED-SOURCE NVIDIA DRIVER BINARY BLOBS!*
 
@@ -61,7 +61,7 @@ sudo make clean && sudo make && sudo make modules_install
 sudo cp -vi arch/x86/boot/bzImage /boot/vmlinuz-rtai
 }}}
 
-8a.) Modify menu.lst or grub.cfg to use the new kernel. Each set of configs might need to be modified by hand due to different busses of hard drives and location of installation.
+8a.) Modify menu.lst or grub.cfg to use the new kernel. Each set of configs might need to be modified by hand due to different locations of hard drives and installation.
 
 {{{
 sudo nano /boot/grub/menu.lst

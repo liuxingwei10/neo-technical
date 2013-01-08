@@ -1,6 +1,6 @@
 =This page is out of date and no longer maintained=
 
-==Getting and building EMC 2.4.5 (latest) on Arch Linux with RTAI MAGMA (latest from CVS) from source==
+===Getting and building EMC 2.4.5 (latest) on Arch Linux with RTAI MAGMA (latest from CVS) from source===
 
 For those who want to do this using makepkg:
 

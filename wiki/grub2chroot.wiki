@@ -59,7 +59,7 @@ Please note: We are still using /dev/sda3 as our example.
 
 {{{
 sleep 5 && sync
-umount -l /mnt/harddrive{/sys,/proc,/dev}
+umount -l /mnt/harddrive/{sys,proc,dev}
 umount /dev/sda3
 }}}
 

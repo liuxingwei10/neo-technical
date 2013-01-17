@@ -35,6 +35,8 @@ ldconfig
 
 6a.) Install GRUB 2 to the MBR:
 
+Please note: We use /dev/sda as our hard drive for this example.
+
 {{{
 grub2-install --no-floppy /dev/sda
 }}}

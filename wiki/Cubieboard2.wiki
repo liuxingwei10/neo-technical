@@ -1,4 +1,4 @@
-= Cubieboard2 from scratch =
+= Cubieboard2 from scratch (INCOMPLETE) =
 
 == Introduction ==
 

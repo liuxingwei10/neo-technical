@@ -20,8 +20,24 @@ You will need the following packages installed on your host system before procee
 
 == Building the cross compiler ==
 
-1a.) Download crosstool-ng:
+1a.) Download crosstool-ng and config file for Cubieboard2:
 
 http://crosstool-ng.org/#using_the_latest_development_stuff
 
-For "make menuconfig" I have made a crosstool-ng config file that you can load via the Kconfig interface (Load an Alternate Configuration File) that you can download here:
+For "./ct-ng menuconfig" I have made a crosstool-ng config file that you can load via the Kconfig interface (Load an Alternate Configuration File) that you can download here:
+
+https://neo-technical.googlecode.com/svn/trunk/crosstool/crosstool-ng.config
+
+Be sure that after you download and save it, to load the file and save to .config
+
+2a.) Compile crosstool-ng:
+
+After loading the crosstool-ng config file, run the following command:
+
+{{{
+ct-ng build
+}}}
+
+Your cross compiler should now be in in your ~/x-tools folder. Because I do a lot of cross compiling, I have modified the PATH variable in my /etc/profile so I no longer have to run export PATH="$PATH:/home/whatever/x-tools/arm-unknown-linux-gnueabihf/bin"
+
+3a.) Now that you have your cross compiler in your PATH (however method you decide to do that) it is time to build U-Boot

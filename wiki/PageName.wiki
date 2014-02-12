@@ -18,4 +18,4 @@ You will need the following packages installed on your host system before procee
  * automake 1.13.4 recommended (1.14.1 is known to have issues)
  * autoconf 2.69 recommended
 
-== Building the toolchain ==
+== Building the cross compiler ==

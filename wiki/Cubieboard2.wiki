@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-What we will be doing is building everything the board needs to get up and running, this includes compiling the bootloader (U-Boot) an optimized cross compiler for our specific platform, the Linux kernel, and whatever else.
+What we will be doing is building everything the board needs to get up and running, this includes compiling the bootloader (U-Boot) making an optimized cross compiler for our specific platform, building the Linux kernel, and whatever else.
 
 === Prerequisites ===
 

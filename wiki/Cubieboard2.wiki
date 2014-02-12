@@ -19,3 +19,9 @@ You will need the following packages installed on your host system before procee
  * autoconf 2.69 recommended
 
 == Building the cross compiler ==
+
+1a.) Download crosstool-ng:
+
+http://crosstool-ng.org/#using_the_latest_development_stuff
+
+For "make menuconfig" I have made a crosstool-ng config file that you can load via the Kconfig interface (Load an Alternate Configuration File) that you can download here:

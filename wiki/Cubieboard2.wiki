@@ -48,6 +48,7 @@ Your cross compiler should now be in in your ~/x-tools folder. Because I do a lo
 {{{
 cd ~/ && mkdir -p cubieboard-dev && cd cubieboard-dev
 git clone https://github.com/linux-sunxi/u-boot-sunxi.git
+git clone https://github.com/linux-sunxi/linux-sunxi.git
 git clone git://github.com/linux-sunxi/sunxi-tools.git
 git clone git://github.com/linux-sunxi/sunxi-boards.git
 }}}
@@ -78,3 +79,5 @@ cd ..
 cd sunxi-boards
 ../sunxi-tools/fex2bin sys_config/a20/cubieboard2.fex script.bin
 }}}
+
+7a.)

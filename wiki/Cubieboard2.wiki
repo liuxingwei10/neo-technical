@@ -67,11 +67,13 @@ make CROSS_COMPILE=arm-unknown-linux-gnueabihf- Cubieboard2
 cd ..
 }}}
 
-5a.) Export the tools directory to your PATH environment, for example:
+5a.) Export the U-Boot tools directory to your PATH environment, for example:
 
 {{{
 export PATH="$PATH:/home/your user/cubieboard-dev/u-boot-sunxi/tools"
 }}}
+
+Your PATH environment variable should now have both your cross compiler and your U-Boot tools directories.
 
 6a.) Compile fex2bin:
 
@@ -86,6 +88,10 @@ cd ..
 {{{
 cd sunxi-boards
 ../sunxi-tools/fex2bin sys_config/a20/cubieboard2.fex script.bin
+cd ..
 }}}
 
-8a.) 
+8a.) Compile the Linux kernel:
+
+{{{
+cd linux-sunxi

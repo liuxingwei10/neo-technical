@@ -9,9 +9,11 @@ What we will be doing is building everything the board needs to get up and runni
 You will need the following packages installed on your host system before proceeding:
 
  * mercurial (hg)
+ * git (git-core)
  * make 3.82 recommended (4.0 is known to have issues)
  * gcc 4.8.2 or 4.7.3 recommended
  * g++ 4.8.2 or 4.7.3 recommended
+ * binutils 2.22 or later recommended
  * mpfr 3.1.2 recommended
  * gmp (libgmp) 5.1.3 recommended
  * GNU mpc (libmpc) 1.0.2 recommended
@@ -28,7 +30,7 @@ For "./ct-ng menuconfig" I have made a crosstool-ng config file that you can loa
 
 https://neo-technical.googlecode.com/svn/trunk/crosstool/crosstool-ng.config
 
-Be sure that after you download and save it, to load the file and save to .config
+*Be sure that after you download and save it, to load the file and save to .config*
 
 2a.) Compile crosstool-ng:
 
@@ -40,4 +42,10 @@ ct-ng build
 
 Your cross compiler should now be in in your ~/x-tools folder. Because I do a lot of cross compiling, I have modified the PATH variable in my /etc/profile so I no longer have to run export PATH="$PATH:/home/whatever/x-tools/arm-unknown-linux-gnueabihf/bin"
 
-3a.) Now that you have your cross compiler in your PATH (however method you decide to do that) it is time to build U-Boot
+3a.) Now that you have your cross compiler in your PATH (however method you decide to do that) it is time to start fetching the required sources for the cubieboard2:
+
+{{{
+git clone https://github.com/linux-sunxi/u-boot-sunxi.git
+git clone git://github.com/linux-sunxi/sunxi-tools.git
+git clone git://github.com/linux-sunxi/sunxi-boards.git
+}}}

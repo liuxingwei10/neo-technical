@@ -52,7 +52,9 @@ git clone git://github.com/linux-sunxi/sunxi-boards.git
 
 4a.) Compile U-Boot:
 
-*PLEASE NOTE: I have not yet messed with the Cubieboard2 enough to get it to boot off of an external SATA drive. All instructions from here on are meant to be used for SD cards ONLY!*
+*PLEASE NOTE: I have not yet messed with the Cubieboard2 enough to get it to boot off of an external SATA drive!*
+
+*All instructions from here on are meant to be used for SD cards ONLY!*
 
 {{{
 cd u-boot-sunxi

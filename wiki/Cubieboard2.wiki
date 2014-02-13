@@ -10,6 +10,7 @@ You will need the following packages installed on your host system before procee
 
  * mercurial (hg)
  * git (git-core)
+ * CLooG (Chunky Loop Generator) Parma + PPL or ISL
  * make 3.82 recommended (4.0 is known to have issues)
  * gcc 4.8.2 or 4.7.3 recommended
  * g++ 4.8.2 or 4.7.3 recommended

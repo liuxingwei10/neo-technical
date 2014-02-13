@@ -75,3 +75,6 @@ cd ..
 6a.) Compile script.bin:
 
 {{{
+cd sunxi-boards
+../sunxi-tools/fex2bin sys_config/a20/cubieboard2.fex script.bin
+}}}

@@ -93,5 +93,11 @@ cd ..
 
 8a.) Compile the Linux kernel:
 
+For a good example kernel config, optimized for the Cubieboard2, you can download one that I made here:
+
 {{{
 cd linux-sunxi
+
+ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make uImage modules
+mkdir -p output
+ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" INSTALL_MOD_PATH="output" make modules_install

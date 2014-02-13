@@ -21,6 +21,8 @@ You will need the following packages installed on your host system before procee
  * automake 1.13.4 recommended (1.14.1 is known to have issues)
  * autoconf 2.69 recommended
 
+*Please note: If you have any U-Boot utilities installed on your host system such as mkimage, you should remove it now to prevent issues later on*
+
 == Building the cross compiler ==
 
 1a.) Download crosstool-ng and config file for Cubieboard2:
@@ -65,7 +67,13 @@ make CROSS_COMPILE=arm-unknown-linux-gnueabihf- Cubieboard2
 cd ..
 }}}
 
-5a.) Compile fex2bin:
+5a.) Export the tools directory to your PATH environment, for example:
+
+{{{
+export PATH="$PATH:/home/your user/cubieboard-dev/u-boot-sunxi/tools"
+}}}
+
+6a.) Compile fex2bin:
 
 {{{
 cd sunxi-tools
@@ -73,11 +81,11 @@ make fex2bin
 cd ..
 }}}
 
-6a.) Compile script.bin:
+7a.) Compile script.bin:
 
 {{{
 cd sunxi-boards
 ../sunxi-tools/fex2bin sys_config/a20/cubieboard2.fex script.bin
 }}}
 
-7a.)
+8a.) 

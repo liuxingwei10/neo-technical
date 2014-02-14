@@ -154,9 +154,8 @@ mkimage -C none -A arm -T script -d boot.cmd boot.scr
 
 11a.) Wipe your SD card with zeros:
 
-
 {{{
-dd if=/dev/zero of=/dev/YourSDCard bs=1024 count=200000
+dd if=/dev/zero of=/dev/YourSDCard bs=1024 count=100000
 }}}
 
 12a.) Install the bootloader to the SD card:
@@ -175,22 +174,35 @@ dd if=u-boot.img of=/dev/YourSDCard bs=1024 seek=40
 fdisk /dev/YourSDCard
 }}}
 
-Create a new Linux partition (ID 83) to the maximum allowable size and be sure it starts on a physical sector boundary.
+Create a new Linux partition (ID 83) at the start of the SD card to the maximum allowable size and be sure it starts on a physical sector boundary. Toggle the boot flag on the partition you just made by entering "a" into fdisk prompt and selecting the corresponding partition number (should be 1.) Press "w" and then enter to save and write changes to disk.
 
+14a.) Format your SD card:
+
+{{{
+mkfs.ext4 /dev/YourSDCard1
+}}}
+
+
+15a.) Mount it:
+
+{{{
+mkdir -p /mnt/sd
+mount /dev/YourSDCard1 /mnt/sd
+}}}
 
 12a.) Move the required files onto your bootable media:
 
 *Please note: Depending on how you wrote your boot.cmd file, the locations of where you should put your boot.scr, boot.cmd and script.bin may differ.*
 
 {{{
-cp -prv linux-sunxi/arch/arm/boot/uImage /your/sd/card/boot/uImage
-cp -prv linux-sunxi/output/lib/modules/* /your/sd/card/lib/modules/
-cp -prv boot.cmd /your/sd/card/
-cp -prv boot.scr /your/sd/card/
-cp -prv sunxi-boards/script.bin /your/sd/card/
+cp -prv linux-sunxi/arch/arm/boot/uImage /mnt/sd/boot/uImage
+cp -prv linux-sunxi/output/lib/modules/* /mnt/sd/lib/modules/
+cp -prv boot.cmd /mnt/sd/
+cp -prv boot.scr /mnt/sd/
+cp -prv sunxi-boards/script.bin /mnt/sd/
 }}}
 
 
 == Finishing up ==
 
-All you need now is a filesystem!
+All you need now is a filesystem! (Use gentoo.)

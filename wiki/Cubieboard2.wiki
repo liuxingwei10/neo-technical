@@ -43,7 +43,7 @@ After loading the crosstool-ng config file, run the following command:
 ct-ng build
 }}}
 
-Your cross compiler should now be in in your ~/x-tools folder. Because I do a lot of cross compiling, I have modified the PATH variable in my /etc/profile so I no longer have to run export PATH="$PATH:/home/whatever/x-tools/arm-unknown-linux-gnueabihf/bin"
+Your cross compiler should now be in in your ~/x-tools folder. Because I do a lot of cross compiling, I have modified the PATH variable in my ~/.bashrc so I no longer have to run export PATH="$PATH:/home/whatever/x-tools/arm-unknown-linux-gnueabihf/bin"
 
 3a.) Now that you have your cross compiler in your PATH (however method you decide to do that) it is time to start fetching the required sources for the cubieboard2:
 
@@ -222,6 +222,42 @@ All you need now is a filesystem! I recommend the following:
 http://mirrors.rit.edu/gentoo/releases/arm/autobuilds/current-stage3-armv7a_hardfp/
 
 Enjoy your Cubieboard2!
+
+== Example layout ==
+
+ls /mnt/sd:
+
+{{{
+bin   boot.cmd  dev  home  lost+found  mnt  proc  run   srv  tmp  var
+boot  boot.scr  etc  lib   media       opt  root  sbin  sys  usr
+}}}
+
+ls /mnt/sd/boot:
+
+{{{
+script.bin  uImage
+}}}
+
+cat /mnt/sd/boot.cmd:
+
+{{{
+setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p1 rootwait rw
+ext2load mmc 0 0x43000000 boot/script.bin
+ext2load mmc 0 0x48000000 uImage boot/uImage
+bootm 0x48000000
+}}}
+
+echo $PATH:
+
+{{{
+/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.8.2:/home/ntu/x-tools/arm-unknown-linux-gnueabihf/bin:/home/ntu/devel/cubie/u-boot-sunxi/tools
+}}}
+
+cat ~/.bashrc:
+
+{{{
+export PATH="$PATH:/home/ntu/x-tools/arm-unknown-linux-gnueabihf/bin:/home/ntu/devel/cubie/u-boot-sunxi/tools"
+}}}
 
 = TODO =
 

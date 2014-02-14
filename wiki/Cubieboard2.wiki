@@ -174,7 +174,7 @@ dd if=u-boot.img of=/dev/YourSDCard bs=1024 seek=40
 fdisk /dev/YourSDCard
 }}}
 
-Create a new Linux partition (ID 83) at the start of the SD card to the maximum allowable size and be sure it starts on a physical sector boundary. Toggle the boot flag on the partition you just made by entering "a" into fdisk prompt and selecting the corresponding partition number (should be 1.) Press "w" and then enter to save and write changes to disk.
+Create a new Linux partition (ID 83) at the start of the SD card to the maximum allowable size and be sure it starts on a physical sector boundary.
 
 14a.) Format your SD card:
 

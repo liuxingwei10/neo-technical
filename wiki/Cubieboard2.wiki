@@ -247,6 +247,20 @@ ext2load mmc 0 0x48000000 uImage boot/uImage
 bootm 0x48000000
 }}}
 
+fdisk -l:
+
+{{{
+Disk /dev/sdc: 14.9 GiB, 16009658368 bytes, 31268864 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x00000000
+
+Device    Boot Start       End   Blocks  Id System
+/dev/sdc1       2048  31268863 15633408  83 Linux
+}}}
+
 echo $PATH:
 
 {{{

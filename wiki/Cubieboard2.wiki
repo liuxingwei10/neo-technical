@@ -135,4 +135,4 @@ ext2load mmc 0 0x48000000 uImage boot/uImage
 bootm 0x48000000
 }}}
 
-*Please note: This boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem.*
+*Please note: This boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem. At *

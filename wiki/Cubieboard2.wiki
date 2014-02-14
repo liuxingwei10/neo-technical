@@ -124,7 +124,7 @@ I've only tested the Cubieboard2 with an external SD card and here is how I did 
 
 === Generating required stuff to boot ===
 
-9a.) Generate a boot.cmd file:
+9a.) Write your boot.cmd file in your favorite text editor:
 
 Depending on how you have your SD card partitioned (mine is just one big ext4 partition to the maximum size of the SD card) there are a few ways to do this. If you're sticking everything on one partition such as your kernel and your boot directory, you want your boot.cmd file to look like this:
 
@@ -135,4 +135,62 @@ ext2load mmc 0 0x48000000 uImage boot/uImage
 bootm 0x48000000
 }}}
 
-*Please note: This boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem. At *
+*Please note: This boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem, while leaving boot.scr and boot.img in the root directory of your filesystem. At your option, you may place boot.cmd and boot.scr in the /boot directory. In such case, modify your boot.cmd accordingly:*
+
+{{{
+setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p1 rootwait rw
+ext2load mmc 0 0x43000000 script.bin
+ext2load mmc 0 0x48000000 uImage
+bootm 0x48000000
+}}}
+
+10a.) Generate a boot.scr file:
+
+{{{
+mkimage -C none -A arm -T script -d boot.cmd boot.scr
+}}}
+
+=== Preparing your SD card ===
+
+11a.) Wipe your SD card with zeros:
+
+
+{{{
+dd if=/dev/zero of=/dev/YourSDCard bs=1024 count=200000
+}}}
+
+12a.) Install the bootloader to the SD card:
+
+{{{
+cd u-boot-sunxi
+dd if=spl/sunxi-spl.bin of=/dev/YourSDCard bs=1024 seek=8
+dd if=u-boot.img of=/dev/YourSDCard bs=1024 seek=40
+}}}
+
+13a.) Partition your SD card:
+
+*Please note: Do not use cfdisk, gparted, parted, or any other utilities because a lot of them suck, for example cfdisk wants to use terrible sectors that lead to poor performance such as sector 63 instead of 2048, 4096, or at least some sort of a multiple of the physical sector size of the drive being used. For example, my 2TB hard drive has an optimal I/O size of 4096 and a physical sector size of 4096, yet cfdisk believes a sector size of 63 makes more sense.*
+
+{{{
+fdisk /dev/YourSDCard
+}}}
+
+Create a new Linux partition (ID 83) to the maximum allowable size and be sure it starts on a physical sector boundary.
+
+
+12a.) Move the required files onto your bootable media:
+
+*Please note: Depending on how you wrote your boot.cmd file, the locations of where you should put your boot.scr, boot.cmd and script.bin may differ.*
+
+{{{
+cp -prv linux-sunxi/arch/arm/boot/uImage /your/sd/card/boot/uImage
+cp -prv linux-sunxi/output/lib/modules/* /your/sd/card/lib/modules/
+cp -prv boot.cmd /your/sd/card/
+cp -prv boot.scr /your/sd/card/
+cp -prv sunxi-boards/script.bin /your/sd/card/
+}}}
+
+
+== Finishing up ==
+
+All you need now is a filesystem!

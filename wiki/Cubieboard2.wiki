@@ -57,13 +57,11 @@ git clone git://github.com/linux-sunxi/sunxi-tools.git
 git clone git://github.com/linux-sunxi/sunxi-boards.git
 }}}
 
-== Begin building ==
+== Begin building for Cubieboard2 ==
 
 4a.) Compile U-Boot:
 
 *PLEASE NOTE: I have not yet messed with the Cubieboard2 enough to get it to boot off of an external SATA drive!*
-
-*All instructions from here on are meant to be used for SD cards ONLY!*
 
 {{{
 cd u-boot-sunxi
@@ -77,7 +75,7 @@ cd ..
 export PATH="$PATH:/home/your user/cubieboard-dev/u-boot-sunxi/tools"
 }}}
 
-Your PATH environment variable should now have both your cross compiler and your U-Boot tools directories.
+Your PATH environment variable should now have both your cross compiler and your U-Boot tools directories, this allows for the kernel to find mkimage to generate a U-Bootable kernel image (uImage)
 
 6a.) Compile fex2bin:
 
@@ -101,9 +99,26 @@ cd ..
 
 For a good example kernel config, optimized for the Cubieboard2, you can download one that I made here:
 
+https://neo-technical.googlecode.com/svn/trunk/cubieboard2/cubieboard2.defconfig
+
+You can load it either by copying it to .config in your kernel tree or loading it via the ncurses make menuconfig interface. Note that this kernel config is just a base config to get the board going, along with some other odds and ends.
+
 {{{
 cd linux-sunxi
-
+ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make menuconfig
 ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make uImage modules
 mkdir -p output
 ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" INSTALL_MOD_PATH="output" make modules_install
+}}}
+
+== Transferring it to your bootable media ==
+
+Putting it all to use is more or less not very straight forward. Ideally it would be best to boot the Cubieboard2 off of an external SATA hard drive instead of an SD card, USB flash drive or similar, to avoid the flash becoming worn out. You'll also run into slower transfer rates than a real external hard drive.
+
+I've only tested the Cubieboard2 with an external SD card and here is how I did it, but honestly, don't use an SD card with this board. I'm writing it down here so it's easy for other people to BUILD upon, not simply copy and wish for high performance and high speed reads and writes. If you want faster r/w speeds and don't want to ruin your flash devices, DO NOT DO THIS!
+
+*YOU HAVE BEEN WARNED!*
+
+*Please note: This part of the wiki assumes you know what you are doing and plan on either building your own root filesystem from scratch (gentoo is awesome for this) OR want to simply use your own kernel and bootloader that you just built by following the steps above, with the use of another person's prebuilt root filesystem. If you plan on using someone else's prebuilt root filesystem, be sure to replace their kernel and kernel modules with your own (check the root of the installation media, the /boot directory, and /lib/modules for this.)*
+
+9a.) 

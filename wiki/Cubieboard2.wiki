@@ -116,7 +116,7 @@ cd ..
 
 Putting it all to use is more or less not very straight forward. Ideally it would be best to boot the Cubieboard2 off of an external SATA hard drive instead of an SD card, USB flash drive or similar, to avoid the flash becoming worn out. You'll also run into slower transfer rates than a real external hard drive.
 
-I've only tested the Cubieboard2 with an external SD card and here is how I did it, but honestly, don't use an SD card with this board. I'm writing it down here so it's easy for other people to BUILD upon, not simply copy and wish for high performance and high speed reads and writes. If you want faster r/w speeds and don't want to ruin your flash devices, DO NOT DO THIS!
+I've only tested the Cubieboard2 with an external SD card and here is how I did it, but honestly, don't use an SD card with this board. I'm writing it down here so it's easy for other people to BUILD upon, not simply copy and wish for high performance and high speed reads and writes. If you want faster r/w speeds and don't want to ruin your flash devices, *DO NOT DO THIS!*
 
 *YOU HAVE BEEN WARNED!*
 

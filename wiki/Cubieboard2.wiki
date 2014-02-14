@@ -1,4 +1,4 @@
-= Cubieboard2 from scratch (INCOMPLETE) =
+= Cubieboard2 from scratch =
 
 == Introduction ==
 
@@ -190,7 +190,7 @@ mkdir -p /mnt/sd
 mount /dev/YourSDCard1 /mnt/sd
 }}}
 
-12a.) Move the required files onto your bootable media:
+16a.) Move the required files onto your bootable media:
 
 *Please note: Depending on how you wrote your boot.cmd file, the locations of where you should put your boot.scr, boot.cmd and script.bin may differ.*
 
@@ -202,7 +202,27 @@ cp -prv boot.scr /mnt/sd/
 cp -prv sunxi-boards/script.bin /mnt/sd/
 }}}
 
+17a.) Unmount your SD card:
+
+{{{
+sleep 5 && sync
+umount /mnt/sd
+}}}
+
+Make sure it's unmounted:
+
+{{{
+umount /dev/YourSDCard1
+}}}
 
 == Finishing up ==
 
-All you need now is a filesystem! (Use gentoo.)
+All you need now is a filesystem! I recommend the following:
+
+http://mirrors.rit.edu/gentoo/releases/arm/autobuilds/current-stage3-armv7a_hardfp/
+
+Enjoy your Cubieboard2!
+
+= TODO =
+
+ * Hard drive support (Documentation and testing)

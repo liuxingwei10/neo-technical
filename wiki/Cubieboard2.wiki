@@ -109,6 +109,7 @@ ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make menuconfig
 ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make uImage modules
 mkdir -p output
 ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" INSTALL_MOD_PATH="output" make modules_install
+cd ..
 }}}
 
 == Transferring it to your bootable media ==
@@ -121,4 +122,17 @@ I've only tested the Cubieboard2 with an external SD card and here is how I did 
 
 *Please note: This part of the wiki assumes you know what you are doing and plan on either building your own root filesystem from scratch (gentoo is awesome for this) OR want to simply use your own kernel and bootloader that you just built by following the steps above, with the use of another person's prebuilt root filesystem. If you plan on using someone else's prebuilt root filesystem, be sure to replace their kernel and kernel modules with your own (check the root of their filesystem, the /boot directory, and /lib/modules for this.)*
 
-9a.) 
+=== Generating required stuff to boot ===
+
+9a.) Generate a boot.cmd file:
+
+Depending on how you have your SD card partitioned (mine is just one big ext4 partition to the maximum size of the SD card) there are a few ways to do this. If you're sticking everything on one partition such as your kernel and your boot directory, you want your boot.cmd file to look like this:
+
+{{{
+setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p1 rootwait rw
+ext2load mmc 0 0x43000000 boot/script.bin
+ext2load mmc 0 0x48000000 uImage boot/uImage
+bootm 0x48000000
+}}}
+
+*Please note: This boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem.*

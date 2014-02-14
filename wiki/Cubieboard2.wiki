@@ -119,6 +119,6 @@ I've only tested the Cubieboard2 with an external SD card and here is how I did 
 
 *YOU HAVE BEEN WARNED!*
 
-*Please note: This part of the wiki assumes you know what you are doing and plan on either building your own root filesystem from scratch (gentoo is awesome for this) OR want to simply use your own kernel and bootloader that you just built by following the steps above, with the use of another person's prebuilt root filesystem. If you plan on using someone else's prebuilt root filesystem, be sure to replace their kernel and kernel modules with your own (check the root of the installation media, the /boot directory, and /lib/modules for this.)*
+*Please note: This part of the wiki assumes you know what you are doing and plan on either building your own root filesystem from scratch (gentoo is awesome for this) OR want to simply use your own kernel and bootloader that you just built by following the steps above, with the use of another person's prebuilt root filesystem. If you plan on using someone else's prebuilt root filesystem, be sure to replace their kernel and kernel modules with your own (check the root of their filesystem, the /boot directory, and /lib/modules for this.)*
 
 9a.) 

@@ -95,8 +95,6 @@ cd ..
 
 8a.) Compile the Linux kernel:
 
-*THIS PART IS INCOMPLETE*
-
 For a good example kernel config, optimized for the Cubieboard2, you can download one that I made here:
 
 https://neo-technical.googlecode.com/svn/trunk/cubieboard2/cubieboard2.defconfig

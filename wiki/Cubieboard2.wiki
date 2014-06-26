@@ -40,7 +40,7 @@ https://neo-technical.googlecode.com/svn/trunk/crosstool/crosstool-ng.config
 After loading the crosstool-ng config file, run the following command:
 
 {{{
-ct-ng build
+$ ct-ng build
 }}}
 
 Your cross compiler should now be in in your ~/x-tools folder. Because I do a lot of cross compiling, I have modified the PATH variable in my ~/.bashrc so I no longer have to run export PATH="$PATH:/home/whatever/x-tools/arm-unknown-linux-gnueabihf/bin"
@@ -50,11 +50,11 @@ Your cross compiler should now be in in your ~/x-tools folder. Because I do a lo
 == Fetch required sources ==
 
 {{{
-cd ~/ && mkdir -p cubieboard-dev && cd cubieboard-dev
-git clone https://github.com/linux-sunxi/u-boot-sunxi.git
-git clone https://github.com/linux-sunxi/linux-sunxi.git
-git clone git://github.com/linux-sunxi/sunxi-tools.git
-git clone git://github.com/linux-sunxi/sunxi-boards.git
+$ cd ~/ && mkdir -p cubieboard-dev && cd cubieboard-dev
+$ git clone https://github.com/linux-sunxi/u-boot-sunxi.git
+$ git clone https://github.com/linux-sunxi/linux-sunxi.git
+$ git clone git://github.com/linux-sunxi/sunxi-tools.git
+$ git clone git://github.com/linux-sunxi/sunxi-boards.git
 }}}
 
 == Begin building for Cubieboard2 ==
@@ -64,16 +64,16 @@ git clone git://github.com/linux-sunxi/sunxi-boards.git
 *PLEASE NOTE: I have not yet messed with the Cubieboard2 enough to get it to boot off of an external SATA drive!*
 
 {{{
-cd u-boot-sunxi
-make CROSS_COMPILE=arm-unknown-linux-gnueabihf- Cubieboard2_config
-make CROSS_COMPILE=arm-unknown-linux-gnueabihf-
-cd ..
+$ cd u-boot-sunxi
+$ make CROSS_COMPILE=arm-unknown-linux-gnueabihf- Cubieboard2_config
+$ make CROSS_COMPILE=arm-unknown-linux-gnueabihf-
+$ cd ..
 }}}
 
 5a.) Export the U-Boot tools directory to your PATH environment, for example:
 
 {{{
-export PATH="$PATH:/home/your user/cubieboard-dev/u-boot-sunxi/tools"
+$ export PATH="$PATH:/home/your user/cubieboard-dev/u-boot-sunxi/tools"
 }}}
 
 Your PATH environment variable should now have both your cross compiler and your U-Boot tools directories, this allows for the kernel to find mkimage to generate a U-Bootable kernel image (uImage)
@@ -81,17 +81,17 @@ Your PATH environment variable should now have both your cross compiler and your
 6a.) Compile fex2bin:
 
 {{{
-cd sunxi-tools
-make fex2bin
-cd ..
+$ cd sunxi-tools
+$ make fex2bin
+$ cd ..
 }}}
 
 7a.) Compile script.bin:
 
 {{{
-cd sunxi-boards
-../sunxi-tools/fex2bin sys_config/a20/cubieboard2.fex script.bin
-cd ..
+$ cd sunxi-boards
+$ ../sunxi-tools/fex2bin sys_config/a20/cubieboard2.fex script.bin
+$ cd ..
 }}}
 
 8a.) Compile the Linux kernel:
@@ -103,12 +103,12 @@ https://neo-technical.googlecode.com/svn/trunk/cubieboard2/cubieboard2.defconfig
 You can load it either by copying it to .config in your kernel tree or loading it via the ncurses make menuconfig interface. Note that this kernel config is just a base config to get the board going, along with some other odds and ends.
 
 {{{
-cd linux-sunxi
-ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make menuconfig
-ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make uImage modules
-mkdir -p output
-ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" INSTALL_MOD_PATH="output" make modules_install
-cd ..
+$ cd linux-sunxi
+$ ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make menuconfig
+$ ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" make uImage modules
+$ mkdir -p output
+$ ARCH="arm" CROSS_COMPILE="arm-unknown-linux-gnueabihf-" INSTALL_MOD_PATH="output" make modules_install
+$ cd ..
 }}}
 
 == Transferring it to your bootable media ==
@@ -146,7 +146,7 @@ bootm 0x48000000
 10a.) Generate a boot.scr file:
 
 {{{
-mkimage -C none -A arm -T script -d boot.cmd boot.scr
+$ mkimage -C none -A arm -T script -d boot.cmd boot.scr
 }}}
 
 === Preparing your SD card ===
@@ -154,15 +154,15 @@ mkimage -C none -A arm -T script -d boot.cmd boot.scr
 11a.) Wipe your SD card with zeros:
 
 {{{
-dd if=/dev/zero of=/dev/YourSDCard bs=1024 count=100000
+# dd if=/dev/zero of=/dev/YourSDCard bs=1024 count=100000
 }}}
 
 12a.) Install the bootloader to the SD card:
 
 {{{
-cd u-boot-sunxi
-dd if=spl/sunxi-spl.bin of=/dev/YourSDCard bs=1024 seek=8
-dd if=u-boot.img of=/dev/YourSDCard bs=1024 seek=40
+$ cd u-boot-sunxi
+# dd if=spl/sunxi-spl.bin of=/dev/YourSDCard bs=1024 seek=8
+# dd if=u-boot.img of=/dev/YourSDCard bs=1024 seek=40
 }}}
 
 13a.) Partition your SD card:
@@ -170,7 +170,7 @@ dd if=u-boot.img of=/dev/YourSDCard bs=1024 seek=40
 *Please note: Do not use cfdisk, gparted, parted, or any other utilities because a lot of them suck, for example cfdisk wants to use terrible sectors that lead to poor performance such as sector 63 instead of 2048, 4096, or at least some sort of a multiple of the physical sector size of the drive being used. For example, my 2TB hard drive has an optimal I/O size of 4096 and a physical sector size of 4096, yet cfdisk believes a sector size of 63 makes more sense.*
 
 {{{
-fdisk /dev/YourSDCard
+# fdisk /dev/YourSDCard
 }}}
 
 Create a new Linux partition (ID 83) at the start of the SD card to the maximum allowable size and be sure it starts on a physical sector boundary.
@@ -178,15 +178,15 @@ Create a new Linux partition (ID 83) at the start of the SD card to the maximum 
 14a.) Format your SD card:
 
 {{{
-mkfs.ext4 /dev/YourSDCard1
+# mkfs.ext4 /dev/YourSDCard1
 }}}
 
 
 15a.) Mount it:
 
 {{{
-mkdir -p /mnt/sd
-mount /dev/YourSDCard1 /mnt/sd
+# mkdir -p /mnt/sd
+# mount /dev/YourSDCard1 /mnt/sd
 }}}
 
 16a.) Move the required files onto your bootable media:
@@ -194,24 +194,24 @@ mount /dev/YourSDCard1 /mnt/sd
 *Please note: Depending on how you wrote your boot.cmd file, the locations of where you should put your boot.scr, boot.cmd and script.bin may differ.*
 
 {{{
-cp -prv linux-sunxi/arch/arm/boot/uImage /mnt/sd/boot/uImage
-cp -prv linux-sunxi/output/lib/modules/* /mnt/sd/lib/modules/
-cp -prv boot.cmd /mnt/sd/
-cp -prv boot.scr /mnt/sd/
-cp -prv sunxi-boards/script.bin /mnt/sd/
+# cp -prv linux-sunxi/arch/arm/boot/uImage /mnt/sd/boot/uImage
+# cp -prv linux-sunxi/output/lib/modules/* /mnt/sd/lib/modules/
+# cp -prv boot.cmd /mnt/sd/
+# cp -prv boot.scr /mnt/sd/
+# cp -prv sunxi-boards/script.bin /mnt/sd/
 }}}
 
 17a.) Unmount your SD card:
 
 {{{
-sleep 5 && sync
-umount /mnt/sd
+# sleep 5 && sync
+# umount /mnt/sd
 }}}
 
 Make sure it's unmounted:
 
 {{{
-umount /dev/YourSDCard1
+# umount /dev/YourSDCard1
 }}}
 
 == Finishing up ==

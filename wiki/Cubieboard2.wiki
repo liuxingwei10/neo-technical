@@ -24,6 +24,7 @@ You will need the following packages installed on your host system before procee
 *Please note: If you have any U-Boot utilities installed on your host system such as mkimage, you should remove it now to prevent issues later on*
 
 *Please note: Commands with a starting $ implies a standard user command.*
+
 *Commands with a # are meant to be run as root or using sudo.*
 
 == Building the cross compiler ==

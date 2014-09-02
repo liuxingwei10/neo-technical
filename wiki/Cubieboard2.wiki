@@ -147,6 +147,15 @@ ext2load mmc 0 0x48000000 uImage
 bootm 0x48000000
 }}}
 
+*For AHCI SATA:*
+
+{{{
+console=ttyS0,115200 root=/dev/sda1 rootwait rw
+ext4load scsi 0 0x43000000 script.bin
+ext4load scsi 0 0x48000000 uImage
+bootm 0x48000000
+}}}
+
 10a.) Generate a boot.scr file:
 
 {{{

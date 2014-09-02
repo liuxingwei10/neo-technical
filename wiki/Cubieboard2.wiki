@@ -11,9 +11,9 @@ You will need the following packages installed on your host system before procee
  * mercurial (hg)
  * git (git-core)
  * CLooG (Chunky Loop Generator) Parma + PPL or ISL
- * make 3.82 recommended (4.0 is known to have issues)
- * gcc 4.8.2 or 4.7.3 recommended
- * g++ 4.8.2 or 4.7.3 recommended
+ * make 3.81 or 3.82 recommended (4.0 is known to have issues)
+ * gcc 4.8.3 or 4.7.4 recommended
+ * g++ 4.8.3 or 4.7.4 recommended
  * binutils 2.22 or later recommended
  * mpfr 3.1.2 recommended
  * gmp (libgmp) 5.1.3 recommended
@@ -138,7 +138,7 @@ ext2load mmc 0 0x48000000 uImage boot/uImage
 bootm 0x48000000
 }}}
 
-*Please note: This boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem, while leaving boot.scr and boot.img in the root directory of your filesystem. At your option, you may place boot.cmd and boot.scr in the /boot directory. In such case, modify your boot.cmd accordingly:*
+*Please note: The above boot.cmd file assumes you will place your script.bin and kernel binary in the /boot directory of your root filesystem, while leaving boot.scr and boot.cmd in the root directory of your filesystem. At your option, you may place boot.cmd and boot.scr in the /boot directory. In such case, modify your boot.cmd accordingly:*
 
 {{{
 setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p1 rootwait rw

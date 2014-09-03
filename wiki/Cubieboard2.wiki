@@ -276,7 +276,7 @@ Device    Boot Start       End   Blocks  Id System
 echo $PATH:
 
 {{{
-/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.8.2:/home/ntu/x-tools/arm-unknown-linux-gnueabihf/bin:/home/ntu/devel/cubie/u-boot-sunxi/tools
+/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.8.3:/home/ntu/x-tools/arm-unknown-linux-gnueabihf/bin:/home/ntu/devel/cubie/u-boot-sunxi/tools
 }}}
 
 cat ~/.bashrc:
